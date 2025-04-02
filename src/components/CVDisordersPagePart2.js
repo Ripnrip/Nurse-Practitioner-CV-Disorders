@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+// Import react-pdf components and configure worker
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source (ensure this matches the setup in Part 1)
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const CVDisordersPagePart2 = () => {
-  const [activeTab, setActiveTab] = useState('acs');
+  const [activeTab, setActiveTab] = useState('acs_basics');
   const [showAnswers, setShowAnswers] = useState({});
+  // State for PDF viewer and width
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  // Effect to measure container width
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -13,33 +38,33 @@ const CVDisordersPagePart2 = () => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      <div className="w-full bg-purple-600 p-6 text-white">
+      <div className="w-full bg-orange-600 p-6 text-white">
         <h1 className="text-3xl font-bold text-center">Cardiovascular Disorders</h1>
-        <p className="text-xl text-center mt-2">Part One: Pages 31-40 (ACS/MI)</p>
+        <p className="text-xl text-center mt-2">Part One: Pages 21-30 (ACS Basics, Diagnosis, Mgmt)</p>
       </div>
 
       <div className="flex flex-wrap border-b border-gray-200 w-full">
         <button 
-          onClick={() => setActiveTab('acs')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'acs' ? 'bg-purple-100 border-b-2 border-purple-600' : ''}`}
+          onClick={() => setActiveTab('acs_basics')}
+          className={`px-4 py-2 font-medium ${activeTab === 'acs_basics' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
         >
-          ACS Overview
+          ACS Basics
         </button>
         <button 
-          onClick={() => setActiveTab('ecg_mi')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'ecg_mi' ? 'bg-purple-100 border-b-2 border-purple-600' : ''}`}
+          onClick={() => setActiveTab('diagnosis')}
+          className={`px-4 py-2 font-medium ${activeTab === 'diagnosis' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
         >
-          ECG in MI
+          Diagnosis
         </button>
         <button 
-          onClick={() => setActiveTab('location')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'location' ? 'bg-purple-100 border-b-2 border-purple-600' : ''}`}
+          onClick={() => setActiveTab('management')}
+          className={`px-4 py-2 font-medium ${activeTab === 'management' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
         >
-          MI Location
+          Management
         </button>
         <button 
           onClick={() => setActiveTab('quiz')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'quiz' ? 'bg-purple-100 border-b-2 border-purple-600' : ''}`}
+          className={`px-4 py-2 font-medium ${activeTab === 'quiz' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
         >
           Self Quiz
         </button>
@@ -52,238 +77,235 @@ const CVDisordersPagePart2 = () => {
       </div>
 
       <div className="p-6 w-full">
-        {activeTab === 'acs' && (
+        {activeTab === 'acs_basics' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">Acute Coronary Syndrome (ACS) Overview</h2>
+            <h2 className="text-2xl font-bold text-orange-800 mb-4">ACS Basics</h2>
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Spectrum of ACS</h3>
-              <p className="mb-4">ACS is a spectrum of conditions resulting from acute myocardial ischemia:</p>
+              <h3 className="text-xl font-bold mb-3">Definition & Pathophysiology</h3>
+              <p className="mb-3">Acute Coronary Syndrome (ACS) refers to a spectrum of conditions associated with sudden, reduced blood flow to the heart muscle (myocardial ischemia or infarction).</p>
+              <p className="mb-3">It's most often caused by the rupture or erosion of an atherosclerotic plaque within a coronary artery. This rupture exposes thrombogenic material, leading to platelet aggregation and thrombus formation, which partially or completely occludes the artery.</p>
+            </div>
+
+            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+              <h3 className="text-xl font-bold mb-3 text-orange-800">Spectrum of ACS</h3>
+              <p className="mb-3">ACS is classified based on ECG findings and cardiac biomarker levels:</p>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Unstable Angina (UA):</strong> Ischemia without infarction (no biomarker elevation).</li>
-                <li><strong>Non-ST-Segment Elevation Myocardial Infarction (NSTEMI):</strong> Infarction with elevated cardiac biomarkers but no significant ST-segment elevation on ECG.</li>
-                <li><strong>ST-Segment Elevation Myocardial Infarction (STEMI):</strong> Infarction with elevated cardiac biomarkers and significant ST-segment elevation on ECG, indicating complete coronary artery occlusion.</li>
-              </ul>
-            </div>
-
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-              <h3 className="text-xl font-bold mb-3 text-purple-800">Clinical Presentation</h3>
-              <p className="mb-3">Common symptoms include:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Chest pain or discomfort (pressure, tightness, squeezing)</li>
-                <li>Pain radiating to jaw, neck, shoulders, arms (especially left)</li>
-                <li>Shortness of breath (dyspnea)</li>
-                <li>Diaphoresis (sweating)</li>
-                <li>Nausea and vomiting</li>
-                <li>Fatigue, lightheadedness</li>
-              </ul>
-              <p className="mt-3 text-sm">Note: Atypical presentations (e.g., epigastric pain, fatigue only) are more common in women, elderly, and patients with diabetes.</p>
-            </div>
-
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-yellow-800">Practice Question</h3>
-              <p className="mb-4">What is the key difference between Unstable Angina and NSTEMI?</p>
-              <button 
-                onClick={() => toggleAnswer('ua-nstemi')}
-                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-              >
-                {showAnswers['ua-nstemi'] ? 'Hide Answer' : 'Show Answer'}
-              </button>
-              {showAnswers['ua-nstemi'] && (
-                <div className="mt-4 p-3 bg-white rounded">
-                  <p><strong>Answer:</strong> The presence of myocardial necrosis (infarction), indicated by elevated cardiac biomarkers (e.g., Troponin). Unstable Angina involves ischemia without infarction (normal biomarkers), while NSTEMI involves infarction (elevated biomarkers).</p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'ecg_mi' && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">ECG Changes in Myocardial Infarction</h2>
-            
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Key ECG Findings</h3>
-              <p className="mb-3">Specific ECG changes can indicate ischemia, injury, and infarction:</p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li><strong>ST-Segment Elevation:</strong> Indicates acute myocardial injury, typically seen in STEMI. Defined as new elevation at the J-point in ≥2 contiguous leads (
-                  <span className="font-mono text-sm">{"> "}1 mm</span> in most leads, 
-                  <span className="font-mono text-sm">{"> "}2 mm</span> in V2-V3 for men ≥40, 
-                  <span className="font-mono text-sm">{"> "}2.5 mm</span> in V2-V3 for men &lt;40, 
-                  <span className="font-mono text-sm">{"> "}1.5 mm</span> in V2-V3 for women).
+                <li>
+                  <strong>Unstable Angina (UA):</strong> 
+                  Symptoms of myocardial ischemia (e.g., chest pain) at rest or with minimal exertion, or a significant change from previous stable angina pattern. 
+                  <span className="font-semibold">ECG:</span> May show ST depression, T-wave inversion, or be normal. 
+                  <span className="font-semibold">Biomarkers:</span> Cardiac troponins are <span className="font-bold">negative</span> (no significant myocardial necrosis).
                 </li>
-                <li><strong>ST-Segment Depression:</strong> Indicates myocardial ischemia. May be seen in UA, NSTEMI, or as reciprocal changes in STEMI.</li>
-                <li><strong>T-Wave Inversion:</strong> Can indicate ischemia or infarction (often appears later). Deep, symmetric T-wave inversions are particularly suggestive.</li>
-                <li><strong>Pathological Q Waves:</strong> Indicate prior or evolving infarction (necrosis). Defined as Q wave duration ≥0.04 sec or depth ≥1/3 of R wave height in ≥2 contiguous leads.</li>
-                <li><strong>Hyperacute T Waves:</strong> Tall, peaked T waves seen very early in STEMI.</li>
+                <li>
+                  <strong>Non-ST-Segment Elevation Myocardial Infarction (NSTEMI):</strong>
+                  Similar presentation to UA, but with evidence of myocardial necrosis. 
+                  <span className="font-semibold">ECG:</span> Similar to UA (ST depression, T-wave inversion, or normal). No ST elevation.
+                  <span className="font-semibold">Biomarkers:</span> Cardiac troponins are <span className="font-bold">positive</span> (elevated).
+                </li>
+                 <li>
+                  <strong>ST-Segment Elevation Myocardial Infarction (STEMI):</strong>
+                  Evidence of myocardial necrosis with characteristic ECG changes indicating complete coronary artery occlusion.
+                  <span className="font-semibold">ECG:</span> ST-segment elevation in specific leads, or new Left Bundle Branch Block (LBBB).
+                  <span className="font-semibold">Biomarkers:</span> Cardiac troponins are <span className="font-bold">positive</span> (elevated).
+                </li>
               </ul>
+              <p className="mt-3 text-sm">Note: UA and NSTEMI are often grouped together as Non-ST-Segment Elevation ACS (NSTE-ACS) due to similar initial management strategies.</p>
             </div>
 
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-              <h3 className="text-xl font-bold mb-3 text-purple-800">Evolution of ECG Changes in STEMI</h3>
-              <ol className="list-decimal pl-5 space-y-2">
-                <li><strong>Immediate (minutes):</strong> Hyperacute T waves.</li>
-                <li><strong>Minutes to Hours:</strong> ST-segment elevation begins.</li>
-                <li><strong>Hours to Days:</strong> ST elevation peaks, T wave inverts, Q waves may develop.</li>
-                <li><strong>Days to Weeks:</strong> ST segments normalize, T wave inversion persists, Q waves persist.</li>
-                <li><strong>Weeks to Months/Years:</strong> T waves may normalize, Q waves usually persist indefinitely.</li>
-              </ol>
-            </div>
-            
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-yellow-800">Practice Question</h3>
-              <p className="mb-4">What do pathological Q waves on an ECG typically signify?</p>
-              <button 
-                onClick={() => toggleAnswer('q-waves')}
-                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-              >
-                {showAnswers['q-waves'] ? 'Hide Answer' : 'Show Answer'}
-              </button>
-              {showAnswers['q-waves'] && (
-                <div className="mt-4 p-3 bg-white rounded">
-                  <p><strong>Answer:</strong> Pathological Q waves typically signify myocardial necrosis (infarction) that has already occurred. They represent electrically silent scar tissue and usually persist long-term after an MI.</p>
-                </div>
-              )}
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 className="text-xl font-bold mb-3">Common Symptoms</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Chest pain/pressure/discomfort (often described as squeezing, heavy, tight; may radiate to jaw, neck, arms, back)</li>
+                <li>Dyspnea (Shortness of breath)</li>
+                <li>Diaphoresis (Sweating)</li>
+                <li>Nausea/Vomiting</li>
+                <li>Fatigue/Weakness</li>
+                <li>Dizziness/Lightheadedness</li>
+              </ul>
+               <p className="mt-3 text-sm text-gray-600">Atypical presentations (e.g., epigastric pain, fatigue only) are more common in women, the elderly, and patients with diabetes.</p>
             </div>
           </div>
         )}
-
-        {activeTab === 'location' && (
+        
+        {activeTab === 'diagnosis' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">Localizing Myocardial Infarction with ECG</h2>
-            
-            <div className="overflow-x-auto border rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-purple-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location of MI</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leads with ST Elevation / Q Waves</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coronary Artery Involved (Typical)</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Anterior</td>
-                    <td className="px-6 py-4 font-mono">V3, V4</td>
-                    <td className="px-6 py-4">Left Anterior Descending (LAD)</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Septal</td>
-                    <td className="px-6 py-4 font-mono">V1, V2</td>
-                    <td className="px-6 py-4">LAD (septal branches)</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lateral</td>
-                    <td className="px-6 py-4 font-mono">I, aVL, V5, V6</td>
-                    <td className="px-6 py-4">Left Circumflex (LCx) or LAD (diagonal branches)</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Inferior</td>
-                    <td className="px-6 py-4 font-mono">II, III, aVF</td>
-                    <td className="px-6 py-4">Right Coronary Artery (RCA) (most common) or LCx</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Posterior</td>
-                    <td className="px-6 py-4">
-                      ST depression in V1-V3 (reciprocal)<br/>
-                      Tall R waves in V1-V2<br/>
-                      (Confirm with posterior leads V7-V9 if available)
-                    </td>
-                    <td className="px-6 py-4">RCA or LCx</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Right Ventricular</td>
-                    <td className="px-6 py-4">
-                      ST elevation in V4R (right-sided lead)<br/>
-                      Often associated with inferior MI
-                    </td>
-                    <td className="px-6 py-4">RCA</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Anteroseptal</td>
-                    <td className="px-6 py-4 font-mono">V1, V2, V3, V4</td>
-                    <td className="px-6 py-4">LAD</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Anterolateral</td>
-                    <td className="px-6 py-4 font-mono">V3, V4, V5, V6, I, aVL</td>
-                    <td className="px-6 py-4">LAD and/or LCx</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Inferolateral</td>
-                    <td className="px-6 py-4 font-mono">II, III, aVF, V5, V6, I, aVL</td>
-                    <td className="px-6 py-4">RCA and LCx</td>
-                  </tr>
-                </tbody>
-              </table>
+            <h2 className="text-2xl font-bold text-orange-800 mb-4">Diagnosis of ACS</h2>
+            <p className="text-lg text-gray-700 mb-4">Diagnosis relies on integrating clinical presentation, ECG findings, and cardiac biomarker results.</p>
+
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 className="text-xl font-bold mb-3">1. Clinical Presentation (History & Physical)</h3>
+               <ul className="list-disc pl-5 space-y-1">
+                 <li>Detailed description of symptoms (PQRST: Provocation/Palliation, Quality, Radiation, Severity, Timing).</li>
+                 <li>Assessment of cardiovascular risk factors.</li>
+                 <li>Physical exam may reveal signs of heart failure (rales, JVD, S3), arrhythmias, or hemodynamic instability, but can often be normal.</li>
+               </ul>
+            </div>
+
+            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+              <h3 className="text-xl font-bold mb-3 text-orange-800">2. Electrocardiogram (ECG)</h3>
+               <ul className="list-disc pl-5 space-y-2">
+                 <li><strong>Crucial first step:</strong> Obtain within 10 minutes of presentation for chest pain/ACS symptoms.</li>
+                 <li><strong>STEMI Findings:</strong> New ST-segment elevation (≥1 mm in ≥2 contiguous limb leads or ≥2 mm in ≥2 contiguous precordial leads) or new LBBB. Indicates need for immediate reperfusion.</li>
+                 <li><strong>NSTE-ACS Findings (UA/NSTEMI):</strong> ST depression (≥0.5 mm), T-wave inversion (≥1 mm), or transient ST elevation. ECG can also be normal.</li>
+                 <li><strong>Reciprocal Changes:</strong> ST depression in leads opposite to those with ST elevation can help confirm STEMI.</li>
+                 <li><strong>Localization:</strong> The leads showing ST elevation often indicate the area of infarction (e.g., II, III, aVF = Inferior; V1-V4 = Anterior).</li>
+                 <li><strong>Serial ECGs:</strong> Important if initial ECG is non-diagnostic, as changes can evolve.</li>
+               </ul>
+            </div>
+
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 className="text-xl font-bold mb-3">3. Cardiac Biomarkers (Troponins)</h3>
+               <ul className="list-disc pl-5 space-y-1">
+                 <li><strong>Troponin I or Troponin T:</strong> Preferred markers due to high sensitivity and specificity for myocardial injury.</li>
+                 <li><strong>Significance:</strong> Elevated levels indicate myocardial necrosis (infarction).</li>
+                 <li><strong>Timing:</strong> Begin to rise 2-4 hours after injury onset, peak around 12-24 hours, remain elevated for days.</li>
+                 <li><strong>Serial Measurements:</strong> Typically drawn on presentation and repeated 3-6 hours later (using high-sensitivity assays may allow earlier rule-out/rule-in).</li>
+                 <li><strong>Distinguishes UA from NSTEMI:</strong> Troponins are <span className="font-bold">negative</span> in UA and <span className="font-bold">positive</span> in NSTEMI and STEMI.</li>
+                 <li><strong>CK-MB:</strong> Less specific than troponin; may still be used in some settings, returns to baseline faster (useful for detecting re-infarction).</li>
+               </ul>
+            </div>
+             <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+              <h3 className="text-xl font-bold mb-3 text-orange-800">Risk Stratification</h3>
+              <p>Tools like TIMI (Thrombolysis in Myocardial Infarction) and GRACE (Global Registry of Acute Coronary Events) scores help predict risk of adverse outcomes in NSTE-ACS and guide decisions about invasive strategies.</p>
+            </div>
+          </div>
+        )}
+        
+        {activeTab === 'management' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-orange-800 mb-4">Management of ACS</h2>
+            <p className="text-lg text-gray-700 mb-4">Goals: Relieve ischemia/pain, prevent further thrombus formation/myocardial damage, restore blood flow (especially in STEMI), and prevent complications.</p>
+
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 className="text-xl font-bold mb-3">Initial Management (All ACS Suspected)</h3>
+              <p className="mb-2">Focus on rapid assessment and initiation of therapies:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>ECG:</strong> Obtain and interpret within 10 minutes.</li>
+                <li><strong>Oxygen:</strong> Supplemental O2 if O2 saturation {'<'} 90% or respiratory distress.</li>
+                <li><strong>Aspirin (ASA):</strong> Chewable non-enteric coated (162-325 mg) ASAP. Antiplatelet effect.</li>
+                <li><strong>Nitroglycerin (NTG):</strong> Sublingual or IV for ongoing chest pain, HTN, or HF signs. Vasodilator. (Contraindicated if hypotension, recent PDE5 inhibitor use, suspected RV infarction).</li>
+                <li><strong>Pain Control:</strong> Morphine IV if pain persists despite NTG. Use cautiously (can mask symptoms, potential adverse effects).</li>
+                <li><strong>Beta-Blockers:</strong> Oral BB within 24 hours if no contraindications (e.g., signs of HF, low output state, risk of shock). Reduces myocardial oxygen demand.</li>
+              </ul>
+              <p className="mt-2 text-sm">Mnemonic <span className="font-mono">"MONA"</span> (Morphine, Oxygen, Nitrates, Aspirin) is often taught but order/indication varies. Focus on timely ECG, ASA, and appropriate use of other agents.</p>
+            </div>
+
+            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+              <h3 className="text-xl font-bold mb-3 text-orange-800">Management Based on ACS Type</h3>
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg mb-2">STEMI</h4>
+                <p className="mb-2"><span className="font-bold">Reperfusion is KEY!</span> Goal is to restore blood flow ASAP.</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li><strong>Primary Percutaneous Coronary Intervention (PCI):</strong> Preferred strategy if available within recommended timeframes (door-to-balloon typically ≤ 90 minutes). Angioplasty +/- stent.</li>
+                  <li><strong>Fibrinolysis ("Clot Buster"):</strong> If PCI is not available promptly (e.g., {'>'}120 minutes from first medical contact). Administer within 30 minutes of arrival (door-to-needle). Examples: alteplase, tenecteplase.</li>
+                  <li><strong>Antiplatelet Therapy:</strong> Dual Antiplatelet Therapy (DAPT) = ASA + P2Y12 inhibitor (e.g., clopidogrel, prasugrel, ticagrelor).</li>
+                  <li><strong>Anticoagulation:</strong> Heparin (unfractionated or LMWH) or bivalirudin often used adjunctively.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg mb-2">NSTE-ACS (UA/NSTEMI)</h4>
+                 <ul className="list-disc pl-5 space-y-1">
+                   <li><strong>Antiplatelet Therapy:</strong> DAPT (ASA + P2Y12 inhibitor).</li>
+                   <li><strong>Anticoagulation:</strong> Heparin (UFH or LMWH), fondaparinux, or bivalirudin.</li>
+                   <li><strong>Risk Stratification:</strong> Determines timing of intervention.</li>
+                   <li><strong>Invasive Strategy:</strong> Coronary angiography +/- revascularization (PCI or CABG). Timing depends on risk (immediate for instability, early for high-risk, delayed/ischemia-guided for lower-risk).</li>
+                   <li><strong>Conservative Strategy:</strong> Medical management initially, angiography if recurrent symptoms/ischemia or positive stress test.</li>
+                   <li>Continue Beta-blockers, consider ACE inhibitors/ARBs, Statins.</li>
+                </ul>
+              </div>
             </div>
             
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-yellow-800">Practice Question</h3>
-              <p className="mb-4">ST-segment elevation in leads II, III, and aVF on an ECG is most indicative of an MI in which location?</p>
-              <button 
-                onClick={() => toggleAnswer('inferior-mi')}
-                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-              >
-                {showAnswers['inferior-mi'] ? 'Hide Answer' : 'Show Answer'}
-              </button>
-              {showAnswers['inferior-mi'] && (
-                <div className="mt-4 p-3 bg-white rounded">
-                  <p><strong>Answer:</strong> Inferior wall myocardial infarction. This pattern typically points to occlusion of the Right Coronary Artery (RCA) or, less commonly, the Left Circumflex Artery (LCx).</p>
-                </div>
-              )}
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+               <h3 className="text-xl font-bold mb-3">Long-Term Management (Secondary Prevention)</h3>
+               <p>Crucial after any ACS event. Includes lifestyle changes (diet, exercise, smoking cessation) and medications like DAPT (duration varies), Beta-blockers, Statins (high-intensity), ACE inhibitors/ARBs (especially if EF low, HTN, DM, CKD).</p>
             </div>
           </div>
         )}
 
         {activeTab === 'quiz' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">Self Quiz - ACS/MI</h2>
+            <h2 className="text-2xl font-bold text-orange-800 mb-4">Self Quiz - ACS Basics, Dx, Mgmt</h2>
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
               
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. Placeholder Question differentiating ACS types?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. How is Unstable Angina (UA) differentiated from NSTEMI based on diagnostic tests?</h4>
                 <button 
-                  onClick={() => toggleAnswer('acs-quiz1')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('acs_quiz1')}
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
                 >
-                  {showAnswers['acs-quiz1'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['acs_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['acs-quiz1'] && (
+                {showAnswers['acs_quiz1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to UA vs NSTEMI vs STEMI.</p>
+                    <p>Both UA and NSTEMI can have similar ECG findings (ST depression, T-wave inversion, or normal ECG). The key difference is cardiac biomarkers: Troponins are <span className="font-bold">negative</span> in UA and <span className="font-bold">positive</span> in NSTEMI, indicating myocardial necrosis in NSTEMI.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. Placeholder Question about ECG changes in MI?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. What are the characteristic ECG findings suggestive of a STEMI?</h4>
                 <button 
-                  onClick={() => toggleAnswer('acs-quiz2')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('acs_quiz2')}
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
                 >
-                  {showAnswers['acs-quiz2'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['acs_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['acs-quiz2'] && (
+                {showAnswers['acs_quiz2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to ST elevation/depression, T waves, Q waves.</p>
+                    <p>New ST-segment elevation (≥1 mm in ≥2 contiguous limb leads or ≥2 mm in ≥2 contiguous precordial leads) or a new Left Bundle Branch Block (LBBB).</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Placeholder Question about localizing an MI using ECG?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. An ECG shows ST elevation in leads II, III, and aVF. Which area of the heart is likely experiencing infarction?</h4>
                 <button 
-                  onClick={() => toggleAnswer('acs-quiz3')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('acs_quiz3')}
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
                 >
-                  {showAnswers['acs-quiz3'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['acs_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['acs-quiz3'] && (
+                {showAnswers['acs_quiz3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer linking specific leads to MI locations (e.g., inferior, anterior).</p>
+                    <p>Inferior wall of the left ventricle.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 4 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">4. What is the preferred reperfusion strategy for STEMI if it can be performed within 90 minutes of first medical contact?</h4>
+                <button 
+                  onClick={() => toggleAnswer('acs_quiz4')}
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
+                >
+                  {showAnswers['acs_quiz4'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['acs_quiz4'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Primary Percutaneous Coronary Intervention (PCI).</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. Beyond Aspirin, what class of medication is crucial for initial antiplatelet therapy in both STEMI and NSTE-ACS? Give an example.</h4>
+                <button 
+                  onClick={() => toggleAnswer('acs_quiz5')}
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
+                >
+                  {showAnswers['acs_quiz5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['acs_quiz5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>A P2Y12 inhibitor. Examples include clopidogrel, ticagrelor, or prasugrel (choice depends on clinical scenario and whether PCI is planned).</p>
                   </div>
                 )}
               </div>
@@ -295,18 +317,52 @@ const CVDisordersPagePart2 = () => {
         {activeTab === 'pdf' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-orange-800 mb-4">Study Guide PDF - Pages 21-30</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
-              <a
-                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_21-30.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition font-medium"
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 21-30 from the study guide PDF.
+              </p>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
               >
-                Open PDF (Pages 21-30)
-              </a>
-              <p className="mt-4 text-sm text-gray-600">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_21-30.pdf` is placed in the `public/pdfs` directory of your project.
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_21-30.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined}
+                  />
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_21-30.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>

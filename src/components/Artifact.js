@@ -1,8 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const HypertensionStudyApp = () => {
   const [activeTab, setActiveTab] = useState('history');
   const [showAnswers, setShowAnswers] = useState({});
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -60,6 +82,12 @@ const HypertensionStudyApp = () => {
           className={`px-4 py-2 font-medium ${activeTab === 'quiz' ? 'bg-blue-100 border-b-2 border-blue-600' : ''}`}
         >
           Self Quiz
+        </button>
+        <button
+          onClick={() => setActiveTab('pdf')}
+          className={`px-4 py-2 font-medium text-sm ${activeTab === 'pdf' ? 'bg-blue-100 border-b-2 border-blue-600' : 'text-gray-600 hover:text-blue-800'}`}
+        >
+          View PDF Pages (11-20)
         </button>
       </div>
 
@@ -553,51 +581,154 @@ const HypertensionStudyApp = () => {
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
               
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. Placeholder Question about Hypertension History?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. What are the four grades of hypertensive retinopathy (Keith-Wagener-Barker classification), and which grades indicate higher cardiovascular risk?</h4>
                 <button 
-                  onClick={() => toggleAnswer('htn-quiz1')}
+                  onClick={() => toggleAnswer('htn_quiz1')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers['htn-quiz1'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['htn_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['htn-quiz1'] && (
+                {showAnswers['htn_quiz1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to history taking.</p>
+                    <p><strong>Grades:</strong></p>
+                    <ul className="list-disc pl-5 mt-1">
+                      <li>Grade I: Mild arteriolar narrowing/sclerosis</li>
+                      <li>Grade II: Moderate/marked sclerosis + AV nicking</li>
+                      <li>Grade III: Grade II + hemorrhages, cotton-wool spots, exudates</li>
+                      <li>Grade IV: Grade III + papilledema</li>
+                    </ul>
+                    <p className="mt-2"><strong>Higher Risk:</strong> Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. Placeholder Question about Physical Exam Findings in HTN?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. According to the 2017 ACC/AHA guidelines, how is Stage 1 Hypertension defined (Systolic and Diastolic values)?</h4>
                 <button 
-                  onClick={() => toggleAnswer('htn-quiz2')}
+                  onClick={() => toggleAnswer('htn_quiz2')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers['htn-quiz2'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['htn_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['htn-quiz2'] && (
+                {showAnswers['htn_quiz2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to physical exam.</p>
+                    <p>Stage 1 Hypertension is defined as a Systolic Blood Pressure (SBP) of 130-139 mm Hg OR a Diastolic Blood Pressure (DBP) of 80-89 mm Hg.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Placeholder Question comparing JNC8 and ACC/AHA guidelines?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. Why is obtaining out-of-office blood pressure measurements (like home or ambulatory monitoring) recommended before starting hypertension treatment?</h4>
                 <button 
-                  onClick={() => toggleAnswer('htn-quiz3')}
+                  onClick={() => toggleAnswer('htn_quiz3')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers['htn-quiz3'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['htn_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['htn-quiz3'] && (
+                {showAnswers['htn_quiz3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to guideline differences.</p>
+                    <p>Out-of-office measurements help confirm the diagnosis of hypertension and rule out "white coat hypertension" (elevated BP only in the clinical setting). They provide a more accurate picture of the patient's usual blood pressure before committing to long-term medication.</p>
                   </div>
                 )}
               </div>
 
+              {/* Question 4 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">4. Name three key lifestyle modifications recommended for managing hypertension.</h4>
+                <button 
+                  onClick={() => toggleAnswer('htn_quiz4')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                >
+                  {showAnswers['htn_quiz4'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['htn_quiz4'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Any three of the following:</p>
+                    <ul className="list-disc pl-5 mt-1">
+                        <li>Weight loss (if overweight/obese)</li>
+                        <li>Heart-healthy diet (e.g., DASH diet - rich in fruits, vegetables, low-fat dairy, reduced saturated/total fat)</li>
+                        <li>Dietary sodium reduction (&lt;1500 mg/day ideally)</li>
+                        <li>Regular aerobic physical activity (e.g., ≥150 min/week moderate-intensity)</li>
+                        <li>Moderation of alcohol consumption</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. A patient reports spells of tachycardia, sweating, and tremor during the history taking. What potential secondary cause of hypertension might this suggest?</h4>
+                <button 
+                  onClick={() => toggleAnswer('htn_quiz5')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                >
+                  {showAnswers['htn_quiz5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['htn_quiz5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>These symptoms (paroxysms of tachycardia, sweating, tremor) are classic signs suggestive of Pheochromocytoma, a catecholamine-secreting tumor.</p>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+        )}
+        
+        {activeTab === 'pdf' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">Study Guide PDF - Pages 11-20</h2>
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 11-20 from the study guide PDF.
+              </p>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
+              >
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_11-20.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined}
+                  />
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_11-20.pdf` is placed in the `public/pdfs` directory.
+              </p>
             </div>
           </div>
         )}

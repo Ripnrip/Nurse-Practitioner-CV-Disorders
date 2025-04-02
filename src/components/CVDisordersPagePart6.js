@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+// Import react-pdf components and configure worker
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const CVDisordersPagePart6 = () => {
   const [activeTab, setActiveTab] = useState('pad');
   const [showAnswers, setShowAnswers] = useState({});
+  // State for PDF viewer and width
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  // Effect to measure container width
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -155,51 +180,86 @@ const CVDisordersPagePart6 = () => {
         {activeTab === 'quiz' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-rose-800 mb-4">Self Quiz - PAD & Aortic Disease</h2>
-            
+
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
-              
+
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. Placeholder Question about PAD symptoms/diagnosis?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. What is the classic symptom of Peripheral Artery Disease (PAD), and how is it typically described?</h4>
                 <button 
-                  onClick={() => toggleAnswer('pad-aortic-quiz1')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('pad_quiz1')}
+                  className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition"
                 >
-                  {showAnswers['pad-aortic-quiz1'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['pad_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['pad-aortic-quiz1'] && (
+                {showAnswers['pad_quiz1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to claudication or ABI interpretation.</p>
+                    <p>Intermittent Claudication: Cramping pain or aching in the calves, thighs, or buttocks brought on by exercise/walking and relieved by rest.</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. Placeholder Question about AAA screening/management?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. What diagnostic test is considered key for PAD diagnosis and involves comparing blood pressures in the ankle and arm? What is a normal value?</h4>
                 <button 
-                  onClick={() => toggleAnswer('pad-aortic-quiz2')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('pad_quiz2')}
+                  className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition"
                 >
-                  {showAnswers['pad-aortic-quiz2'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['pad_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['pad-aortic-quiz2'] && (
+                {showAnswers['pad_quiz2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer about who gets screened or when repair is indicated.</p>
+                    <p>Ankle-Brachial Index (ABI). A normal ABI is typically 1.00 - 1.40.</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Placeholder Question about aortic dissection types/presentation?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. What are the primary screening recommendations for Abdominal Aortic Aneurysm (AAA)?</h4>
                 <button 
-                  onClick={() => toggleAnswer('pad-aortic-quiz3')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('pad_quiz3')}
+                  className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition"
                 >
-                  {showAnswers['pad-aortic-quiz3'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['pad_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['pad-aortic-quiz3'] && (
+                {showAnswers['pad_quiz3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer about Stanford classification or classic symptoms.</p>
+                    <p>USPSTF recommends a one-time screening via abdominal ultrasound for men aged 65-75 who have ever smoked. Selective screening for men 65-75 who never smoked, and insufficient evidence for/against screening women.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 4 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">4. What is the major life-threatening complication of an Abdominal Aortic Aneurysm (AAA)?</h4>
+                <button 
+                  onClick={() => toggleAnswer('pad_quiz4')}
+                  className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition"
+                >
+                  {showAnswers['pad_quiz4'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['pad_quiz4'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Rupture, which often leads to catastrophic internal hemorrhage and high mortality.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. A patient presents with sudden onset severe, tearing chest pain radiating to the back, and has different blood pressures in each arm. What condition should be strongly suspected?</h4>
+                <button 
+                  onClick={() => toggleAnswer('pad_quiz5')}
+                  className="px-4 py-2 bg-rose-500 text-white rounded hover:bg-rose-600 transition"
+                >
+                  {showAnswers['pad_quiz5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['pad_quiz5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Aortic Dissection.</p>
                   </div>
                 )}
               </div>
@@ -211,18 +271,52 @@ const CVDisordersPagePart6 = () => {
         {activeTab === 'pdf' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-rose-800 mb-4">Study Guide PDF - Pages 71-80</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
-              <a
-                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_71-80.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition font-medium"
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 71-80 from the study guide PDF.
+              </p>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
               >
-                Open PDF (Pages 71-80)
-              </a>
-              <p className="mt-4 text-sm text-gray-600">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_71-80.pdf` is placed in the `public/pdfs` directory of your project.
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_71-80.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined}
+                  />
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_71-80.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>

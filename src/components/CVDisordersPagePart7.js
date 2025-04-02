@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+// Import react-pdf components and configure worker
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const CVDisordersPagePart7 = () => {
   const [activeTab, setActiveTab] = useState('ie_basics');
   const [showAnswers, setShowAnswers] = useState({});
+  // State for PDF viewer and width
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  // Effect to measure container width
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -226,51 +251,86 @@ const CVDisordersPagePart7 = () => {
         {activeTab === 'quiz' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-cyan-800 mb-4">Self Quiz - Infective Endocarditis</h2>
-            
+
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
-              
+
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. Placeholder Question about IE risk factors/pathogens?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. What structure is primarily infected in Infective Endocarditis (IE)?</h4>
                 <button 
-                  onClick={() => toggleAnswer('ie-quiz1')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('ie_quiz1')}
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
                 >
-                  {showAnswers['ie-quiz1'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['ie_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['ie-quiz1'] && (
+                {showAnswers['ie_quiz1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer related to IVDU or common bacteria.</p>
+                    <p>The endocardial surface of the heart, most commonly involving the heart valves. It can also affect septal defects, chordae tendineae, or mural endocardium.</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. Placeholder Question about Duke Criteria (Major/Minor)?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. Name three major risk factors for developing Infective Endocarditis.</h4>
                 <button 
-                  onClick={() => toggleAnswer('ie-quiz2')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('ie_quiz2')}
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
                 >
-                  {showAnswers['ie-quiz2'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['ie_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['ie-quiz2'] && (
+                {showAnswers['ie_quiz2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer identifying a Major or Minor criterion.</p>
+                    <p>Any three of: Prosthetic heart valves, Previous history of endocarditis, Structural heart disease (e.g., valvular disease, congenital heart disease), Intravenous drug use (IVDU), Indwelling intravenous catheters, Immunosuppression, Poor dentition or recent dental procedures.</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Placeholder Question about IE management/complications?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. What diagnostic criteria are commonly used to aid in the diagnosis of Infective Endocarditis?</h4>
                 <button 
-                  onClick={() => toggleAnswer('ie-quiz3')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('ie_quiz3')}
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
                 >
-                  {showAnswers['ie-quiz3'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['ie_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['ie-quiz3'] && (
+                {showAnswers['ie_quiz3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer about antibiotic duration or a common complication like emboli.</p>
+                    <p>The Modified Duke Criteria, which include Major Criteria (positive blood cultures for typical organisms, evidence of endocardial involvement on echocardiogram) and Minor Criteria (predisposing condition, fever, vascular phenomena, immunologic phenomena, microbiological evidence not meeting major criteria).</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 4 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">4. What is the cornerstone of treatment for Infective Endocarditis?</h4>
+                <button 
+                  onClick={() => toggleAnswer('ie_quiz4')}
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
+                >
+                  {showAnswers['ie_quiz4'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['ie_quiz4'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Prolonged administration of targeted antimicrobial therapy (antibiotics or antifungals), typically intravenously for several weeks.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. Name two indications for surgical intervention in patients with Infective Endocarditis.</h4>
+                <button 
+                  onClick={() => toggleAnswer('ie_quiz5')}
+                  className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
+                >
+                  {showAnswers['ie_quiz5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['ie_quiz5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Any two of: Severe heart failure due to valve dysfunction, Failure of medical therapy (persistent infection/bacteremia), Fungal endocarditis, Evidence of perivalvular extension (e.g., abscess), Large vegetations associated with high embolic risk, Recurrent embolism despite appropriate antimicrobial therapy, Prosthetic valve dehiscence.</p>
                   </div>
                 )}
               </div>
@@ -282,18 +342,52 @@ const CVDisordersPagePart7 = () => {
         {activeTab === 'pdf' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-cyan-800 mb-4">Study Guide PDF - Pages 81-End</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
-              <a
-                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_81-end.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 transition font-medium"
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 81-End from the study guide PDF.
+              </p>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
               >
-                Open PDF (Pages 81-End)
-              </a>
-              <p className="mt-4 text-sm text-gray-600">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_81-end.pdf` is placed in the `public/pdfs` directory of your project.
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_81-end.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined}
+                  />
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_81-end.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>

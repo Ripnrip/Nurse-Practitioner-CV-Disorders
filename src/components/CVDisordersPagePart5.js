@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+// Import react-pdf components and configure worker
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const CVDisordersPagePart5 = () => {
   const [activeTab, setActiveTab] = useState('cardiomyopathy');
   const [showAnswers, setShowAnswers] = useState({});
+  // State for PDF viewer and width
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  // Effect to measure container width
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -13,27 +38,27 @@ const CVDisordersPagePart5 = () => {
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      <div className="w-full bg-orange-600 p-6 text-white">
+      <div className="w-full bg-indigo-600 p-6 text-white">
         <h1 className="text-3xl font-bold text-center">Cardiovascular Disorders</h1>
-        <p className="text-xl text-center mt-2">Part One: Pages 61-70 (Cardiomyopathy & Pericardial Disease)</p>
+        <p className="text-xl text-center mt-2">Part One: Pages 51-60 (Cardiomyopathy & Pericardial Disease)</p>
       </div>
 
       <div className="flex flex-wrap border-b border-gray-200 w-full">
         <button 
           onClick={() => setActiveTab('cardiomyopathy')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'cardiomyopathy' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
+          className={`px-4 py-2 font-medium ${activeTab === 'cardiomyopathy' ? 'bg-indigo-100 border-b-2 border-indigo-600' : ''}`}
         >
           Cardiomyopathy
         </button>
         <button 
           onClick={() => setActiveTab('pericardial')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'pericardial' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
+          className={`px-4 py-2 font-medium ${activeTab === 'pericardial' ? 'bg-indigo-100 border-b-2 border-indigo-600' : ''}`}
         >
           Pericardial Disease
         </button>
         <button 
           onClick={() => setActiveTab('quiz')} 
-          className={`px-4 py-2 font-medium ${activeTab === 'quiz' ? 'bg-orange-100 border-b-2 border-orange-600' : ''}`}
+          className={`px-4 py-2 font-medium ${activeTab === 'quiz' ? 'bg-indigo-100 border-b-2 border-indigo-600' : ''}`}
         >
           Self Quiz
         </button>
@@ -48,7 +73,7 @@ const CVDisordersPagePart5 = () => {
       <div className="p-6 w-full">
         {activeTab === 'cardiomyopathy' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-orange-800 mb-4">Cardiomyopathies</h2>
+            <h2 className="text-2xl font-bold text-indigo-800 mb-4">Cardiomyopathies</h2>
             <p className="text-lg text-gray-700">Diseases of the heart muscle itself.</p>
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -61,8 +86,8 @@ const CVDisordersPagePart5 = () => {
               </ul>
             </div>
 
-            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-              <h3 className="text-xl font-bold mb-3 text-orange-800">Hypertrophic Cardiomyopathy (HCM)</h3>
+            <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+              <h3 className="text-xl font-bold mb-3 text-indigo-800">Hypertrophic Cardiomyopathy (HCM)</h3>
               <ul className="list-disc pl-5 space-y-2">
                 <li><strong>Pathophysiology:</strong> Marked ventricular hypertrophy (especially septal), often asymmetric, leading to diastolic dysfunction and potentially LV outflow obstruction (HOCM).</li>
                 <li><strong>Causes:</strong> Primarily genetic (autosomal dominant mutations in sarcomere proteins).</li>
@@ -102,7 +127,7 @@ const CVDisordersPagePart5 = () => {
 
         {activeTab === 'pericardial' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-orange-800 mb-4">Pericardial Diseases</h2>
+            <h2 className="text-2xl font-bold text-indigo-800 mb-4">Pericardial Diseases</h2>
             <p className="text-lg text-gray-700">Diseases affecting the pericardium, the sac surrounding the heart.</p>
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -115,8 +140,8 @@ const CVDisordersPagePart5 = () => {
               </ul>
             </div>
 
-            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-              <h3 className="text-xl font-bold mb-3 text-orange-800">Pericardial Effusion</h3>
+            <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+              <h3 className="text-xl font-bold mb-3 text-indigo-800">Pericardial Effusion</h3>
               <ul className="list-disc pl-5 space-y-2">
                 <li><strong>Pathophysiology:</strong> Accumulation of excess fluid in the pericardial space.</li>
                 <li><strong>Causes:</strong> Can result from any cause of pericarditis, heart failure, trauma, malignancy.</li>
@@ -155,52 +180,87 @@ const CVDisordersPagePart5 = () => {
 
         {activeTab === 'quiz' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-orange-800 mb-4">Self Quiz - Cardiomyopathy & Pericardial Disease</h2>
+            <h2 className="text-2xl font-bold text-indigo-800 mb-4">Self Quiz - Cardiomyopathy & Pericardial Disease</h2> 
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
               
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. Placeholder Question differentiating cardiomyopathy types?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. Which type of cardiomyopathy is characterized by enlargement of the ventricles and impaired systolic function (reduced EF)?</h4>
                 <button 
-                  onClick={() => toggleAnswer('myopathy-quiz1')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('myopathy_quiz1')}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
                 >
-                  {showAnswers['myopathy-quiz1'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['myopathy_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['myopathy-quiz1'] && (
+                {showAnswers['myopathy_quiz1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer contrasting DCM, HCM, RCM pathophysiology/findings.</p>
+                    <p>Dilated Cardiomyopathy (DCM).</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. Placeholder Question about acute pericarditis presentation?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. Hypertrophic Cardiomyopathy (HCM) typically involves hypertrophy of which part of the heart, and what is the primary mode of inheritance?</h4>
                 <button 
-                  onClick={() => toggleAnswer('myopathy-quiz2')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('myopathy_quiz2')}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
                 >
-                  {showAnswers['myopathy-quiz2'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['myopathy_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['myopathy-quiz2'] && (
+                {showAnswers['myopathy_quiz2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer describing classic pain, rub, ECG changes.</p>
+                    <p>Marked ventricular hypertrophy, often asymmetric septal hypertrophy. It is primarily genetic (autosomal dominant).</p>
                   </div>
                 )}
               </div>
-              
+
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Placeholder Question about cardiac tamponade signs?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. What type of cardiomyopathy involves stiff, non-compliant ventricles that impair diastolic filling, often caused by conditions like amyloidosis or sarcoidosis?</h4>
                 <button 
-                  onClick={() => toggleAnswer('myopathy-quiz3')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  onClick={() => toggleAnswer('myopathy_quiz3')}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
                 >
-                  {showAnswers['myopathy-quiz3'] ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['myopathy_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers['myopathy-quiz3'] && (
+                {showAnswers['myopathy_quiz3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Placeholder answer mentioning Beck's triad or pulsus paradoxus.</p>
+                    <p>Restrictive Cardiomyopathy (RCM).</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 4 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">4. Describe the classic chest pain associated with acute pericarditis.</h4>
+                <button 
+                  onClick={() => toggleAnswer('myopathy_quiz4')}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
+                >
+                  {showAnswers['myopathy_quiz4'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['myopathy_quiz4'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Sharp, pleuritic chest pain that is worse with inspiration or lying flat, and often relieved by sitting up and leaning forward.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. What is Beck's Triad, and what condition does it suggest?</h4>
+                <button 
+                  onClick={() => toggleAnswer('myopathy_quiz5')}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition"
+                >
+                  {showAnswers['myopathy_quiz5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['myopathy_quiz5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Beck's Triad consists of: 1) Hypotension, 2) Distended Neck Veins (elevated JVP), and 3) Muffled Heart Sounds. It suggests Cardiac Tamponade.</p>
                   </div>
                 )}
               </div>
@@ -212,18 +272,52 @@ const CVDisordersPagePart5 = () => {
         {activeTab === 'pdf' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-indigo-800 mb-4">Study Guide PDF - Pages 51-60</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
-              <a
-                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_51-60.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition font-medium"
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 51-60 from the study guide PDF.
+              </p>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
               >
-                Open PDF (Pages 51-60)
-              </a>
-              <p className="mt-4 text-sm text-gray-600">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_51-60.pdf` is placed in the `public/pdfs` directory of your project.
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_51-60.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined}
+                  />
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_51-60.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>

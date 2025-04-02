@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // Import react-pdf components and configure worker
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -13,6 +13,25 @@ const CVDisordersPagePart1 = () => {
   // State for PDF viewer
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  // Ref and state for container width
+  const pdfContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(null);
+
+  // Effect to measure container width
+  useEffect(() => {
+    const currentRef = pdfContainerRef.current;
+    if (currentRef) {
+      const handleResize = () => {
+        setContainerWidth(currentRef.clientWidth);
+      };
+      // Set initial width
+      handleResize();
+      // Add resize listener
+      window.addEventListener('resize', handleResize);
+      // Cleanup listener on component unmount
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []); // Empty dependency array means this runs once on mount and cleanup on unmount
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -307,71 +326,91 @@ const CVDisordersPagePart1 = () => {
 
         {activeTab === 'quiz' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4">Self Quiz</h2>
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">Self Quiz - Part 1</h2>
             
             <div className="bg-white p-4 rounded-lg border border-gray-200">
               <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
               
+              {/* Question 1 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. What are the four major risk factors for CVD?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">1. What are the "Fatal Four" major cardiovascular risk factors?</h4>
                 <button 
-                  onClick={() => toggleAnswer('quiz1')}
+                  onClick={() => toggleAnswer('quiz1_1')} 
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers.quiz1 ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['quiz1_1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers.quiz1 && (
+                {showAnswers['quiz1_1'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Hypertension, Diabetes mellitus, Dyslipidemia, and Smoking</p>
+                    <p>Hypertension, Diabetes Mellitus, Dyslipidemia, and Smoking.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 2 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. What percentage of elderly patients with hypertension meets their blood pressure target recommendations?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">2. An elderly patient reports becoming short of breath whenever they lie down flat to sleep. What is the medical term for this symptom, and what condition is it strongly associated with?</h4>
                 <button 
-                  onClick={() => toggleAnswer('quiz2')}
+                  onClick={() => toggleAnswer('quiz1_2')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers.quiz2 ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['quiz1_2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers.quiz2 && (
+                {showAnswers['quiz1_2'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Only about one-third of elderly patients meet their blood pressure target recommendations.</p>
+                    <p>Orthopnea. It is strongly associated with Heart Failure.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 3 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. How do age-related cardiovascular changes affect the elderly during rest versus during increased demands?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">3. Which specific age-related cardiovascular change is most directly linked to an increased risk of orthostatic hypotension in the elderly?</h4>
                 <button 
-                  onClick={() => toggleAnswer('quiz3')}
+                  onClick={() => toggleAnswer('quiz1_3')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers.quiz3 ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['quiz1_3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers.quiz3 && (
+                {showAnswers['quiz1_3'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p><strong>At rest:</strong> Age-related changes have modest clinically relevant effects on cardiac performance (resting heart rate, ejection fraction, stroke volume, and cardiac output are well preserved even at very advanced age)</p>
-                    <p className="mt-2"><strong>During increased demands:</strong> The ability to respond to increased demands from exercise or illness declines progressively with advancing age; peak aerobic capacity declines inexorably with age</p>
+                    <p>Decreased baroreceptor responsiveness.</p>
                   </div>
                 )}
               </div>
               
+              {/* Question 4 */}
               <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">4. Case Study: An 80-year-old patient experiences dizziness when standing up. Which age-related cardiovascular change most likely explains this symptom?</h4>
+                <h4 className="font-bold text-gray-800 mb-2">4. What structural change in the aging heart increases the risk for diastolic heart failure and atrial fibrillation?</h4>
                 <button 
-                  onClick={() => toggleAnswer('quiz4')}
+                  onClick={() => toggleAnswer('quiz1_4')}
                   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
-                  {showAnswers.quiz4 ? 'Hide Answer' : 'Show Answer'}
+                  {showAnswers['quiz1_4'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
-                {showAnswers.quiz4 && (
+                {showAnswers['quiz1_4'] && (
                   <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Decreased baroreceptor responsiveness, which increases the risk of orthostatic hypotension.</p>
+                    <p>Decreased myocardial relaxation and compliance (increased stiffness).</p>
                   </div>
                 )}
               </div>
+              
+              {/* Question 5 */}
+              <div className="mb-6">
+                <h4 className="font-bold text-gray-800 mb-2">5. According to statistics presented, what fraction of elderly hypertensive patients typically meets their blood pressure target recommendations?</h4>
+                <button 
+                  onClick={() => toggleAnswer('quiz1_5')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                >
+                  {showAnswers['quiz1_5'] ? 'Hide Answer' : 'Show Answer'}
+                </button>
+                {showAnswers['quiz1_5'] && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded">
+                    <p>Only about one-third.</p>
+                  </div>
+                )}
+              </div>
+
             </div>
           </div>
         )}
@@ -383,7 +422,11 @@ const CVDisordersPagePart1 = () => {
               <p className="mb-4 text-center">
                 Displaying pages 1-10 from the study guide PDF.
               </p>
-              <div className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" style={{ height: '70vh', overflowY: 'auto' }}>
+              <div 
+                ref={pdfContainerRef} 
+                className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" 
+                style={{ height: '70vh', overflowY: 'auto' }}
+              >
                 <Document
                   file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_1-10.pdf"
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
@@ -391,7 +434,11 @@ const CVDisordersPagePart1 = () => {
                   loading={<p>Loading PDF...</p>}
                   error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
                 >
-                  <Page pageNumber={pageNumber} renderTextLayer={false} /> 
+                  <Page 
+                    pageNumber={pageNumber} 
+                    renderTextLayer={false} 
+                    width={containerWidth ? containerWidth : undefined} 
+                  /> 
                 </Document>
               </div>
               {numPages && (

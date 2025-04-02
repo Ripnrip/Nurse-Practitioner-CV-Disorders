@@ -22,7 +22,7 @@ const App = () => {
               onClick={() => setCurrentPage('cvdisorders_part1')} 
               className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders_part1' ? 'bg-lime-600' : 'hover:bg-gray-700'}`}
             >
-           CV (1-10)
+             CV (1-10)
             </button>
             <button 
               onClick={() => setCurrentPage('hypertension')}
@@ -32,7 +32,7 @@ const App = () => {
             </button>
             <button 
               onClick={() => setCurrentPage('cvdisorders1')}
-              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders1' ? 'bg-red-600' : 'hover:bg-gray-700'}`}
+              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders1' ? 'bg-orange-600' : 'hover:bg-gray-700'}`}
             >
               CV (21-30)
             </button>
@@ -56,19 +56,13 @@ const App = () => {
             </button>
              <button 
               onClick={() => setCurrentPage('cvdisorders5')}
-              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders5' ? 'bg-orange-600' : 'hover:bg-gray-700'}`}
-            >
-              CV (61-70)
-            </button>
-            <button 
-              onClick={() => setCurrentPage('cvdisorders6')}
-              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders6' ? 'bg-rose-600' : 'hover:bg-gray-700'}`}
+              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders5' ? 'bg-rose-600' : 'hover:bg-gray-700'}`}
             >
               CV (71-80)
             </button>
-             <button 
-              onClick={() => setCurrentPage('cvdisorders7')}
-              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders7' ? 'bg-cyan-600' : 'hover:bg-gray-700'}`}
+            <button 
+              onClick={() => setCurrentPage('cvdisorders6')}
+              className={`px-3 py-2 rounded flex-shrink-0 ${currentPage === 'cvdisorders6' ? 'bg-cyan-600' : 'hover:bg-gray-700'}`}
             >
               CV (81-End)
             </button>
@@ -79,13 +73,12 @@ const App = () => {
       <div className="container mx-auto py-8">
         {currentPage === 'cvdisorders_part1' && <CVDisordersPagePart1 />}
         {currentPage === 'hypertension' && <HypertensionStudyApp />}
-        {currentPage === 'cvdisorders1' && <CVDisordersPage />}
-        {currentPage === 'cvdisorders2' && <CVDisordersPagePart2 />}
-        {currentPage === 'cvdisorders3' && <CVDisordersPagePart3 />}
-        {currentPage === 'cvdisorders4' && <CVDisordersPagePart4 />}
-        {currentPage === 'cvdisorders5' && <CVDisordersPagePart5 />}
-        {currentPage === 'cvdisorders6' && <CVDisordersPagePart6 />}
-        {currentPage === 'cvdisorders7' && <CVDisordersPagePart7 />}
+        {currentPage === 'cvdisorders1' && <CVDisordersPagePart2 />}
+        {currentPage === 'cvdisorders2' && <CVDisordersPagePart3 />}
+        {currentPage === 'cvdisorders3' && <CVDisordersPagePart4 />}
+        {currentPage === 'cvdisorders4' && <CVDisordersPagePart5 />}
+        {currentPage === 'cvdisorders5' && <CVDisordersPagePart6 />}
+        {currentPage === 'cvdisorders6' && <CVDisordersPagePart7 />}
       </div>
     </div>
   );
