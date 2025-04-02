@@ -5,7 +5,6 @@ import {
   HeartIcon,
   BeakerIcon,
   ExclamationCircleIcon,
-  PillIcon,
   IdentificationIcon,
   ChartBarIcon,
   UserGroupIcon,
@@ -155,7 +154,7 @@ const HypertensionStudyApp = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="rounded-full bg-purple-100 p-2 mr-3">
-                            <PillIcon className="h-5 w-5 text-purple-600" />
+                            <BeakerIcon className="h-5 w-5 text-purple-600" />
                           </div>
                           <span className="font-medium text-gray-900">Prior treatment of hypertension</span>
                         </div>
@@ -642,61 +641,164 @@ const HypertensionStudyApp = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Diagnosis of Hypertension</h2>
             
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Diagnostic Criteria</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>All adults 18 years and older without known HTN should be screened for elevated BP (USPSTF et al., 2021).</li>
-                <li>To diagnose HTN, the provider should use an average of two or more readings obtained on two or more occasions.</li>
-                <li>Out of office BP measurements (ambulatory or home BP monitoring) are recommended to confirm the diagnosis of HTN before starting treatment.</li>
-              </ul>
-              
-              <div className="bg-blue-50 p-4 rounded-lg mt-4">
-                <h4 className="font-bold text-blue-800 mb-2">Key Point:</h4>
-                <p>Proper technique and multiple measurements are essential for accurate diagnosis of hypertension, as a single elevated reading may not reflect true hypertension.</p>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg shadow-md border border-blue-200">
+              <h3 className="text-xl font-bold mb-4 text-blue-800 border-b pb-2 border-blue-200 flex items-center">
+                <div className="rounded-full bg-blue-100 p-2 mr-3">
+                  <ClipboardDocumentCheckIcon className="h-5 w-5 text-blue-600" />
+                </div>
+                Diagnostic Criteria
+              </h3>
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <ul className="space-y-4">
+                  <li className="flex items-start bg-gradient-to-r from-blue-50 to-blue-100 p-3 rounded-lg">
+                    <div className="rounded-full bg-blue-100 p-1.5 mr-3 mt-0.5">
+                      <UserGroupIcon className="h-4 w-4 text-blue-600" />
+                    </div>
+                    <span className="text-gray-700">All adults 18 years and older without known HTN should be screened for elevated BP (USPSTF et al., 2021).</span>
+                  </li>
+                  <li className="flex items-start bg-gradient-to-r from-indigo-50 to-indigo-100 p-3 rounded-lg">
+                    <div className="rounded-full bg-indigo-100 p-1.5 mr-3 mt-0.5">
+                      <ArrowTrendingUpIcon className="h-4 w-4 text-indigo-600" />
+                    </div>
+                    <span className="text-gray-700">To diagnose HTN, the provider should use an average of two or more readings obtained on two or more occasions.</span>
+                  </li>
+                  <li className="flex items-start bg-gradient-to-r from-purple-50 to-purple-100 p-3 rounded-lg">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <ClipboardDocumentCheckIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <span className="text-gray-700">Out of office BP measurements (ambulatory or home BP monitoring) are recommended to confirm the diagnosis of HTN before starting treatment.</span>
+                  </li>
+                </ul>
+                
+                <div className="mt-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400 flex items-start">
+                  <div className="rounded-full bg-blue-500 p-1.5 mr-3 mt-0.5">
+                    <ExclamationCircleIcon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-blue-800 mb-1">Key Point:</h4>
+                    <p className="text-gray-700">Proper technique and multiple measurements are essential for accurate diagnosis of hypertension, as a single elevated reading may not reflect true hypertension.</p>
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-              <h3 className="text-xl font-bold mb-3 text-yellow-800">Hypertension Guidelines: JNC8 vs. ACC/AHA</h3>
-              <p className="mb-3">There has been confusion due to different guidelines. As of 2023, primary care is slowly abandoning JNC8 guidelines and adopting the ACC/AHA 2017 guidelines.</p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div className="bg-white p-3 rounded shadow-sm">
-                  <h4 className="font-bold text-blue-600">JNC8 Diagnostic Criteria</h4>
-                  <ul className="list-disc pl-5 space-y-1 mt-2">
-                    <li>Age &lt;60 years: SBP ≥140 mm Hg and/or DBP ≥90 mm Hg</li>
-                    <li>Age 60 years or older: SBP ≥150 mm Hg and/or DBP ≥90 mm Hg</li>
-                    <li>Age 60 years or older with CKD or diabetes: SBP ≥140 mm Hg and/or DBP ≥90 mm Hg</li>
-                    <li>Pre-hypertension: SBP ≥120 mm Hg and/or DBP ≥80 mm Hg</li>
-                  </ul>
+            <div className="bg-gradient-to-br from-yellow-50 to-amber-100 p-5 rounded-lg shadow-md border border-yellow-200">
+              <h3 className="text-xl font-bold mb-4 text-yellow-800 border-b pb-2 border-yellow-200 flex items-center">
+                <div className="rounded-full bg-yellow-100 p-2 mr-3">
+                  <ChartBarIcon className="h-5 w-5 text-yellow-600" />
                 </div>
-                <div className="bg-white p-3 rounded shadow-sm">
-                  <h4 className="font-bold text-blue-600">ACC/AHA 2017 Guidelines</h4>
-                  <ul className="list-disc pl-5 space-y-1 mt-2">
-                    <li>Normal: SBP &lt;120 mm Hg and DBP &lt;80 mm Hg</li>
-                    <li>Elevated: SBP 120-129 mm Hg and DBP &lt;80 mm Hg</li>
-                    <li>Stage 1 HTN: SBP 130-139 mm Hg or DBP 80-89 mm Hg</li>
-                    <li>Stage 2 HTN: SBP ≥140 mm Hg or DBP ≥90 mm Hg</li>
-                    <li>Hypertensive Crisis: SBP &gt;180 mm Hg and/or DBP &gt;120 mm Hg</li>
-                  </ul>
+                Hypertension Guidelines: JNC8 vs. ACC/AHA
+              </h3>
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <p className="mb-4 text-gray-700">There has been confusion due to different guidelines. As of 2023, primary care is slowly abandoning JNC8 guidelines and adopting the ACC/AHA 2017 guidelines.</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
+                  <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg shadow-sm border border-blue-200">
+                    <h4 className="font-bold text-blue-700 mb-3 border-b pb-2 border-blue-200 flex items-center">
+                      <div className="rounded-full bg-blue-100 p-1.5 mr-2">
+                        <ChartBarIcon className="h-4 w-4 text-blue-600" />
+                      </div>
+                      JNC8 Diagnostic Criteria
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <span className="text-gray-700">Age &lt;60 years: SBP ≥140 mm Hg and/or DBP ≥90 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <span className="text-gray-700">Age 60 years or older: SBP ≥150 mm Hg and/or DBP ≥90 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-blue-600" />
+                        </div>
+                        <span className="text-gray-700">Age 60 years or older with CKD or diabetes: SBP ≥140 mm Hg and/or DBP ≥90 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-yellow-600" />
+                        </div>
+                        <span className="text-gray-700">Pre-hypertension: SBP ≥120 mm Hg and/or DBP ≥80 mm Hg</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 p-4 rounded-lg shadow-sm border border-indigo-200">
+                    <h4 className="font-bold text-indigo-700 mb-3 border-b pb-2 border-indigo-200 flex items-center">
+                      <div className="rounded-full bg-indigo-100 p-1.5 mr-2">
+                        <ChartBarIcon className="h-4 w-4 text-indigo-600" />
+                      </div>
+                      ACC/AHA 2017 Guidelines
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-green-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingDownIcon className="h-3 w-3 text-green-600" />
+                        </div>
+                        <span className="text-gray-700">Normal: SBP &lt;120 mm Hg and DBP &lt;80 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-yellow-600" />
+                        </div>
+                        <span className="text-gray-700">Elevated: SBP 120-129 mm Hg and DBP &lt;80 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-orange-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-orange-600" />
+                        </div>
+                        <span className="text-gray-700">Stage 1 HTN: SBP 130-139 mm Hg or DBP 80-89 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-red-100 p-1 mr-2 mt-0.5">
+                          <ArrowTrendingUpIcon className="h-3 w-3 text-red-600" />
+                        </div>
+                        <span className="text-gray-700">Stage 2 HTN: SBP ≥140 mm Hg or DBP ≥90 mm Hg</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-red-400 p-1 mr-2 mt-0.5">
+                          <ExclamationCircleIcon className="h-3 w-3 text-white" />
+                        </div>
+                        <span className="text-gray-700">Hypertensive Crisis: SBP &gt;180 mm Hg and/or DBP &gt;120 mm Hg</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-green-800">Practice Question</h3>
-              <p className="mb-4">According to the ACC/AHA 2017 guidelines, a 72-year-old patient with a blood pressure of 138/88 mm Hg would be classified as having:</p>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-lg shadow-md border border-green-200 mt-6">
+              <h3 className="text-xl font-bold mb-4 text-green-800 border-b pb-2 border-green-200 flex items-center">
+                <div className="rounded-full bg-green-100 p-2 mr-3">
+                  <AcademicCapIcon className="h-5 w-5 text-green-600" />
+                </div>
+                Practice Question
+              </h3>
+              <p className="mb-4 text-gray-700">According to the ACC/AHA 2017 guidelines, a 72-year-old patient with a blood pressure of 138/88 mm Hg would be classified as having:</p>
               <button 
                 onClick={() => toggleAnswer('bp-classification')}
-                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
               >
                 {showAnswers['bp-classification'] ? 'Hide Answer' : 'Show Answer'}
               </button>
               {showAnswers['bp-classification'] && (
-                <div className="mt-4 p-3 bg-white rounded">
-                  <p><strong>Stage 1 Hypertension</strong></p>
-                  <p>According to ACC/AHA 2017 guidelines, Stage 1 HTN is defined as SBP 130-139 mm Hg or DBP 80-89 mm Hg. This patient's BP of 138/88 mm Hg falls within this range.</p>
-                  <p>Note that under the JNC8 guidelines, this same reading would be considered normal for a patient over 60 years unless they had CKD or diabetes.</p>
+                <div className="mt-3 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-inner">
+                  <div className="bg-white p-4 rounded-lg border-l-4 border-orange-400">
+                    <p className="font-bold text-orange-700 mb-2">Stage 1 Hypertension</p>
+                    <p className="text-gray-700">According to ACC/AHA 2017 guidelines, Stage 1 HTN is defined as SBP 130-139 mm Hg or DBP 80-89 mm Hg. This patient's BP of 138/88 mm Hg falls within this range.</p>
+                    <div className="mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                      <p className="text-sm flex items-start">
+                        <div className="rounded-full bg-yellow-400 p-1 flex-shrink-0 mr-2 mt-0.5">
+                          <span className="text-yellow-900 text-xs font-bold">!</span>
+                        </div>
+                        <span className="text-gray-700">Note that under the JNC8 guidelines, this same reading would be considered normal for a patient over 60 years unless they had CKD or diabetes.</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -813,21 +915,154 @@ const HypertensionStudyApp = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Diagnostic Tests</h2>
             
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Urinary Albumin-Creatinine Ratio (UACR)</h3>
-              <p className="mb-3">The UACR is a simple, non-invasive test that can help detect early kidney damage in patients with hypertension.</p>
-              <p className="mb-3">Normal values are typically less than 30 mg/mmol for urine albumin and less than 10 mg/mmol for urine creatinine.</p>
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-lg shadow-md border border-indigo-200">
+              <h3 className="text-xl font-bold mb-4 text-indigo-800 border-b pb-2 border-indigo-200 flex items-center">
+                <div className="rounded-full bg-indigo-100 p-2 mr-3">
+                  <BeakerIcon className="h-5 w-5 text-indigo-600" />
+                </div>
+                Urinary Albumin-Creatinine Ratio (UACR)
+              </h3>
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex items-start mb-4">
+                  <div className="rounded-full bg-indigo-100 p-1.5 mr-3 mt-0.5 flex-shrink-0">
+                    <ClipboardDocumentCheckIcon className="h-5 w-5 text-indigo-600" />
+                  </div>
+                  <div>
+                    <p className="text-gray-700 mb-2">The UACR is a simple, non-invasive test that can help detect early kidney damage in patients with hypertension.</p>
+                    <p className="text-gray-700">Normal values are typically less than 30 mg/mmol for urine albumin and less than 10 mg/mmol for urine creatinine.</p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-3 border-indigo-300">
+                      <p className="font-medium text-indigo-700 mb-1">UACR Categories:</p>
+                      <ul className="space-y-2 mt-2">
+                        <li className="flex items-center">
+                          <div className="rounded-full bg-green-100 p-1 mr-2">
+                            <span className="text-green-800 font-bold text-xs">N</span>
+                          </div>
+                          <span className="text-gray-700"><span className="font-medium">Normal:</span> &lt;30 mg/g</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="rounded-full bg-yellow-100 p-1 mr-2">
+                            <span className="text-yellow-800 font-bold text-xs">M</span>
+                          </div>
+                          <span className="text-gray-700"><span className="font-medium">Microalbuminuria:</span> 30-300 mg/g</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="rounded-full bg-red-100 p-1 mr-2">
+                            <span className="text-red-800 font-bold text-xs">A</span>
+                          </div>
+                          <span className="text-gray-700"><span className="font-medium">Albuminuria:</span> &gt;300 mg/g</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-3 border-purple-300">
+                      <p className="font-medium text-purple-700 mb-1">Clinical Significance:</p>
+                      <ul className="space-y-2 mt-2">
+                        <li className="flex items-start">
+                          <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                            <ChartBarIcon className="h-3 w-3 text-purple-600" />
+                          </div>
+                          <span className="text-gray-700">Marker of kidney damage</span>
+                        </li>
+                        <li className="flex items-start">
+                          <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                            <ChartBarIcon className="h-3 w-3 text-purple-600" />
+                          </div>
+                          <span className="text-gray-700">Predictor of cardiovascular risk</span>
+                        </li>
+                        <li className="flex items-start">
+                          <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                            <ChartBarIcon className="h-3 w-3 text-purple-600" />
+                          </div>
+                          <span className="text-gray-700">Guides treatment decisions</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
-            <div className="bg-blue-50 p-4 rounded-lg mt-4">
-              <h4 className="font-bold text-blue-800 mb-2">Other Tests</h4>
-              <p>Other tests that may be used in the diagnosis of hypertension include:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Electrocardiogram (ECG)</li>
-                <li>Echocardiogram</li>
-                <li>24-hour ambulatory blood pressure monitoring</li>
-                <li>Carotid ultrasonography</li>
-              </ul>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 rounded-lg shadow-md border border-blue-200">
+              <h3 className="text-xl font-bold mb-4 text-blue-800 border-b pb-2 border-blue-200 flex items-center">
+                <div className="rounded-full bg-blue-100 p-2 mr-3">
+                  <ClipboardDocumentCheckIcon className="h-5 w-5 text-blue-600" />
+                </div>
+                Additional Diagnostic Tests
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-red-100 p-1.5 mr-2">
+                      <HeartIcon className="h-5 w-5 text-red-600" />
+                    </div>
+                    <h4 className="font-medium text-red-800">Electrocardiogram (ECG)</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Detects left ventricular hypertrophy and other cardiac abnormalities associated with hypertension.</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-green-100 p-1.5 mr-2">
+                      <HeartIcon className="h-5 w-5 text-green-600" />
+                    </div>
+                    <h4 className="font-medium text-green-800">Echocardiogram</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Evaluates cardiac structure and function, including left ventricular mass and diastolic function.</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-indigo-100 p-1.5 mr-2">
+                      <ClockIcon className="h-5 w-5 text-indigo-600" />
+                    </div>
+                    <h4 className="font-medium text-indigo-800">24-hour Ambulatory BP Monitoring</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Provides a more comprehensive picture of BP variations throughout the day and night, detecting white coat or masked hypertension.</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-blue-100 p-1.5 mr-2">
+                      <ArrowTrendingUpIcon className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <h4 className="font-medium text-blue-800">Carotid Ultrasonography</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Assesses carotid artery structure and detects atherosclerotic plaques or stenosis.</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-amber-100 p-1.5 mr-2">
+                      <BeakerIcon className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <h4 className="font-medium text-amber-800">Blood Chemistry Panel</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Evaluates electrolytes, glucose, lipids, and renal function to assess overall cardiovascular risk.</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-2">
+                      <BeakerIcon className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <h4 className="font-medium text-purple-800">Urinalysis</h4>
+                  </div>
+                  <p className="ml-8 text-gray-700">Screens for albuminuria, hematuria, and other indicators of kidney damage.</p>
+                </div>
+              </div>
+              
+              <div className="mt-4 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                <div className="flex items-start">
+                  <div className="rounded-full bg-yellow-400 p-1 flex-shrink-0 mr-2 mt-0.5">
+                    <span className="text-yellow-900 text-xs font-bold">!</span>
+                  </div>
+                  <p className="text-sm text-gray-700">Additional specialized tests may be indicated in cases of suspected secondary hypertension or for evaluation of end-organ damage.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -835,19 +1070,203 @@ const HypertensionStudyApp = () => {
         {activeTab === 'treatment' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Treatment Options for Hypertension</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Lifestyle Modifications</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Dietary Approaches to Stop Hypertension (DASH) diet</li>
-                <li>Reduction of sodium intake</li>
-                <li>Regular physical activity</li>
-                <li>Weight loss for overweight individuals</li>
-                <li>Moderation of alcohol intake</li>
-              </ul>
+            
+            <div className="bg-gradient-to-br from-green-50 to-green-100 p-5 rounded-lg shadow-md border border-green-200">
+              <h3 className="text-xl font-bold mb-4 text-green-800 border-b pb-2 border-green-200 flex items-center">
+                <div className="rounded-full bg-green-100 p-2 mr-3">
+                  <GlobeAltIcon className="h-5 w-5 text-green-600" />
+                </div>
+                Lifestyle Modifications
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-green-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-green-100 p-2 mr-2">
+                      <GlobeAltIcon className="h-5 w-5 text-green-600" />
+                    </div>
+                    <h4 className="font-medium text-green-800">DASH Diet</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">Rich in fruits, vegetables, whole grains, and low-fat dairy; low in saturated and total fat.</p>
+                  <div className="mt-3 text-xs bg-green-50 p-2 rounded-lg text-green-700">
+                    <span className="font-bold">BP Reduction:</span> 8-14 mmHg
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-blue-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-blue-100 p-2 mr-2">
+                      <ArrowTrendingDownIcon className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <h4 className="font-medium text-blue-800">Sodium Reduction</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">Limit sodium intake to less than 2,300 mg/day; aim for 1,500 mg/day for optimal effect.</p>
+                  <div className="mt-3 text-xs bg-blue-50 p-2 rounded-lg text-blue-700">
+                    <span className="font-bold">BP Reduction:</span> 2-8 mmHg
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-purple-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-purple-100 p-2 mr-2">
+                      <BoltIcon className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <h4 className="font-medium text-purple-800">Physical Activity</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">Regular aerobic exercise (at least 150 minutes/week of moderate intensity or 75 minutes/week of vigorous intensity).</p>
+                  <div className="mt-3 text-xs bg-purple-50 p-2 rounded-lg text-purple-700">
+                    <span className="font-bold">BP Reduction:</span> 4-9 mmHg
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-red-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-red-100 p-2 mr-2">
+                      <ArrowTrendingDownIcon className="h-5 w-5 text-red-600" />
+                    </div>
+                    <h4 className="font-medium text-red-800">Weight Loss</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">For overweight or obese individuals, aim for BMI &lt;25 kg/m²; every 1 kg weight loss can reduce BP by 1 mmHg.</p>
+                  <div className="mt-3 text-xs bg-red-50 p-2 rounded-lg text-red-700">
+                    <span className="font-bold">BP Reduction:</span> 5-20 mmHg per 10 kg
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-amber-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-amber-100 p-2 mr-2">
+                      <BeakerIcon className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <h4 className="font-medium text-amber-800">Alcohol Moderation</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">Limit to ≤2 drinks/day for men and ≤1 drink/day for women and lighter-weight people.</p>
+                  <div className="mt-3 text-xs bg-amber-50 p-2 rounded-lg text-amber-700">
+                    <span className="font-bold">BP Reduction:</span> 2-4 mmHg
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border-t-4 border-gray-400">
+                  <div className="flex items-center mb-3">
+                    <div className="rounded-full bg-gray-100 p-2 mr-2">
+                      <FireIcon className="h-5 w-5 text-gray-600" />
+                    </div>
+                    <h4 className="font-medium text-gray-800">Smoking Cessation</h4>
+                  </div>
+                  <p className="text-gray-700 text-sm">Smoking increases cardiovascular risk and can cause acute elevation in blood pressure.</p>
+                  <div className="mt-3 text-xs bg-gray-50 p-2 rounded-lg text-gray-700">
+                    <span className="font-bold">Effect:</span> Reduces overall cardiovascular risk
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm">
+                <div className="flex items-start">
+                  <div className="rounded-full bg-blue-500 p-1.5 mr-3 mt-0.5">
+                    <ExclamationCircleIcon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-blue-800 mb-1">Importance of Lifestyle Modifications</h4>
+                    <p className="text-gray-700">Lifestyle modifications are the cornerstone of hypertension prevention and management. They can:</p>
+                    <ul className="mt-2 space-y-1 ml-5 list-disc text-gray-700">
+                      <li>Reduce BP in hypertensive patients</li>
+                      <li>Enhance the efficacy of antihypertensive medications</li>
+                      <li>Decrease cardiovascular risk beyond BP reduction</li>
+                      <li>Prevent or delay the development of hypertension in high-risk populations</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="bg-blue-50 p-4 rounded-lg mt-4">
-              <h4 className="font-bold text-blue-800 mb-2">Pharmacological Treatment</h4>
-              <p>Pharmacological treatment should be considered for patients with Stage 1 hypertension who have a history of cardiovascular disease or are at high risk for cardiovascular events.</p>
+            
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg shadow-md border border-blue-200">
+              <h3 className="text-xl font-bold mb-4 text-blue-800 border-b pb-2 border-blue-200 flex items-center">
+                <div className="rounded-full bg-blue-100 p-2 mr-3">
+                  <BeakerIcon className="h-5 w-5 text-blue-600" />
+                </div>
+                Pharmacological Treatment
+              </h3>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <p className="text-gray-700 mb-4">Pharmacological treatment should be considered for patients with Stage 1 hypertension who have a history of cardiovascular disease or are at high risk for cardiovascular events.</p>
+                
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg">
+                  <h4 className="font-medium text-blue-800 mb-3">First-Line Medications for Hypertension:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-blue-400">
+                      <p className="font-medium text-blue-800 mb-1">Thiazide Diuretics</p>
+                      <p className="text-xs text-gray-700">Examples: hydrochlorothiazide, chlorthalidone</p>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-green-400">
+                      <p className="font-medium text-green-800 mb-1">ACE Inhibitors</p>
+                      <p className="text-xs text-gray-700">Examples: lisinopril, enalapril</p>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-yellow-400">
+                      <p className="font-medium text-yellow-800 mb-1">ARBs</p>
+                      <p className="text-xs text-gray-700">Examples: losartan, valsartan</p>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-red-400">
+                      <p className="font-medium text-red-800 mb-1">CCBs</p>
+                      <p className="text-xs text-gray-700">Examples: amlodipine, diltiazem</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                  <div className="flex items-start">
+                    <div className="rounded-full bg-yellow-400 p-1 flex-shrink-0 mr-2 mt-0.5">
+                      <span className="text-yellow-900 text-xs font-bold">!</span>
+                    </div>
+                    <p className="text-sm text-gray-700">Medication choice should be individualized based on comorbidities, potential side effects, drug interactions, and patient preferences.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-5 rounded-lg shadow-md border border-purple-200">
+              <h3 className="text-xl font-bold mb-4 text-purple-800 border-b pb-2 border-purple-200 flex items-center">
+                <div className="rounded-full bg-purple-100 p-2 mr-3">
+                  <ClipboardDocumentCheckIcon className="h-5 w-5 text-purple-600" />
+                </div>
+                Treatment Considerations for Elderly Patients
+              </h3>
+              
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <ArrowTrendingDownIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <p className="text-gray-700">Start with lower medication doses and titrate slowly ("start low, go slow" approach).</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <ExclamationCircleIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <p className="text-gray-700">Monitor closely for orthostatic hypotension, especially in frail elderly patients.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <BeakerIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <p className="text-gray-700">Be vigilant for drug interactions due to polypharmacy common in elderly patients.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <ClipboardDocumentCheckIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <p className="text-gray-700">Consider comorbidities when selecting antihypertensive medications.</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="rounded-full bg-purple-100 p-1.5 mr-3 mt-0.5">
+                      <UserGroupIcon className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <p className="text-gray-700">Assess for barriers to medication adherence (cost, cognitive impairment, physical limitations).</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
@@ -909,7 +1328,7 @@ const HypertensionStudyApp = () => {
                     </ul>
                     <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
                       <p className="flex items-start">
-                        <div className="rounded-full bg-yellow-400 p-1 mr-2 mt-0.5">
+                        <div className="rounded-full bg-yellow-400 p-1 flex-shrink-0 mr-2 mt-0.5">
                           <span className="text-yellow-900 text-xs font-bold">!</span>
                         </div>
                         <span className="text-gray-700"><span className="font-bold">Higher Risk:</span> Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</span>
@@ -961,7 +1380,7 @@ const HypertensionStudyApp = () => {
                 </button>
                 {showAnswers['htn_quiz3'] && (
                   <div className="mt-3 p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg shadow-inner">
-                    <div className="flex items-start">
+                    <div className="flex items-center">
                       <div className="rounded-full bg-purple-500 p-1.5 mr-2 mt-0.5">
                         <ClipboardDocumentCheckIcon className="h-4 w-4 text-white" />
                       </div>
