@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Nurse-Practitioner-CV-Disorders/static/css/main.c219b671.css",
-    "main.js": "/Nurse-Practitioner-CV-Disorders/static/js/main.c1dd2103.js",
+    "main.js": "/Nurse-Practitioner-CV-Disorders/static/js/main.4aa9c38b.js",
     "index.html": "/Nurse-Practitioner-CV-Disorders/index.html",
     "main.c219b671.css.map": "/Nurse-Practitioner-CV-Disorders/static/css/main.c219b671.css.map",
-    "main.c1dd2103.js.map": "/Nurse-Practitioner-CV-Disorders/static/js/main.c1dd2103.js.map"
+    "main.4aa9c38b.js.map": "/Nurse-Practitioner-CV-Disorders/static/js/main.4aa9c38b.js.map"
   },
   "entrypoints": [
     "static/css/main.c219b671.css",
-    "static/js/main.c1dd2103.js"
+    "static/js/main.4aa9c38b.js"
   ]
 }
