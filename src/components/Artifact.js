@@ -692,7 +692,7 @@ const HypertensionStudyApp = () => {
                 style={{ height: '70vh', overflowY: 'auto' }}
               >
                 <Document
-                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_11-20.pdf"
+                  file={`${process.env.PUBLIC_URL}/pdfs/680_CV_disorders_part_one_students_2023 (1)_11-20.pdf`}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                   onLoadError={(error) => console.error('Error loading PDF:', error)}
                   loading={<p>Loading PDF...</p>}

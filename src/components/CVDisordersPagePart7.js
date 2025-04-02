@@ -352,7 +352,7 @@ const CVDisordersPagePart7 = () => {
                 style={{ height: '70vh', overflowY: 'auto' }}
               >
                 <Document
-                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_81-end.pdf"
+                  file={`${process.env.PUBLIC_URL}/pdfs/680_CV_disorders_part_one_students_2023 (1)_81-End.pdf`}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                   onLoadError={(error) => console.error('Error loading PDF:', error)}
                   loading={<p>Loading PDF...</p>}
@@ -387,7 +387,7 @@ const CVDisordersPagePart7 = () => {
                 </div>
               )}
               <p className="mt-4 text-sm text-gray-600 text-center">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_81-end.pdf` is placed in the `public/pdfs` directory.
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_81-End.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>
