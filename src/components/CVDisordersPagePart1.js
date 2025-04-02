@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
+// Import react-pdf components and configure worker
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+// Configure the worker source (replace with the correct path if needed)
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+
 const CVDisordersPagePart1 = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [showAnswers, setShowAnswers] = useState({});
+  // State for PDF viewer
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const toggleAnswer = (id) => {
     setShowAnswers(prev => ({
@@ -368,18 +379,44 @@ const CVDisordersPagePart1 = () => {
         {activeTab === 'pdf' && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-red-800 mb-4">Study Guide PDF - Pages 1-10</h2>
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
-              <a
-                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_1-10.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition font-medium"
-              >
-                Open PDF (Pages 1-10)
-              </a>
-              <p className="mt-4 text-sm text-gray-600">
-                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_1-10.pdf` is placed in the `public/pdfs` directory of your project.
+            <div className="bg-white p-4 rounded-lg border border-gray-200 flex flex-col items-center">
+              <p className="mb-4 text-center">
+                Displaying pages 1-10 from the study guide PDF.
+              </p>
+              <div className="pdf-container border border-gray-300 mb-4 w-full max-w-3xl" style={{ height: '70vh', overflowY: 'auto' }}>
+                <Document
+                  file="/pdfs/680_CV_disorders_part_one_students_2023 (1)_1-10.pdf"
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  onLoadError={(error) => console.error('Error loading PDF:', error)}
+                  loading={<p>Loading PDF...</p>}
+                  error={<p>Error loading PDF. Make sure the file exists in `public/pdfs`.</p>}
+                >
+                  <Page pageNumber={pageNumber} renderTextLayer={false} /> 
+                </Document>
+              </div>
+              {numPages && (
+                <div className="flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setPageNumber(prev => Math.max(1, prev - 1))}
+                    disabled={pageNumber <= 1}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {pageNumber} of {numPages}
+                  </span>
+                  <button
+                    onClick={() => setPageNumber(prev => Math.min(numPages, prev + 1))}
+                    disabled={pageNumber >= numPages}
+                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              <p className="mt-4 text-sm text-gray-600 text-center">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_1-10.pdf` is placed in the `public/pdfs` directory.
               </p>
             </div>
           </div>
