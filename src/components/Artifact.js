@@ -1,5 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
+import { 
+  ClockIcon,
+  HeartIcon,
+  BeakerIcon,
+  ExclamationCircleIcon,
+  PillIcon,
+  IdentificationIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  ShieldCheckIcon,
+  EyeIcon,
+  ClipboardDocumentCheckIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
+  BoltIcon,
+  FireIcon,
+  GlobeAltIcon,
+  AcademicCapIcon
+} from '@heroicons/react/24/solid';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
@@ -96,148 +115,275 @@ const HypertensionStudyApp = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Important Aspects of the History in Hypertension</h2>
             
-            <div className="overflow-x-auto border rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-green-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Elements to Assess</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Duration of hypertension</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Last known normal blood pressure</li>
-                        <li>Course of the blood pressure</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Prior treatment of hypertension</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Drugs: types, doses, side effects</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Intake of agents that may cause hypertension</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Nonsteroidal antiinflammatory drugs</li>
-                        <li>Estrogens</li>
-                        <li>Adrenal steroids</li>
-                        <li>Cocaine</li>
-                        <li>Sympathomimetics</li>
-                        <li>Excessive sodium</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Family history</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Hypertension</li>
-                        <li>Premature cardiovascular disease or death</li>
-                        <li>Familial diseases: pheochromocytoma, renal disease, diabetes, gout</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Symptoms of secondary causes</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Muscle weakness</li>
-                        <li>Spells of tachycardia, sweating, tremor</li>
-                        <li>Thinning of the skin</li>
-                        <li>Flank pain</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Symptoms of target-organ damage</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Headaches</li>
-                        <li>Transient weakness or blindness</li>
-                        <li>Loss of visual acuity</li>
-                        <li>Chest pain</li>
-                        <li>Dyspnea</li>
-                        <li>Claudication</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Presence of other risk factors</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Smoking</li>
-                        <li>Diabetes</li>
-                        <li>Dyslipidemia</li>
-                        <li>Physical inactivity</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Dietary history</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Sodium</li>
-                        <li>Processed foods</li>
-                        <li>Alcohol</li>
-                        <li>Saturated fats</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Psychosocial factors</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Family structure</li>
-                        <li>Work status</li>
-                        <li>Educational level</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Sexual function</td>
-                    <td className="px-6 py-4">
-                      <p>Assessment of sexual function</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Features of sleep apnea</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Early morning headaches</li>
-                        <li>Daytime somnolence</li>
-                        <li>Loud snoring</li>
-                        <li>Erratic sleep</li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg shadow-md border border-blue-200">
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gradient-to-r from-blue-600 to-indigo-600">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Category</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Elements to Assess</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    <tr className="hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-blue-100 p-2 mr-3">
+                            <ClockIcon className="h-5 w-5 text-blue-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Duration of hypertension</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                              <ArrowTrendingDownIcon className="h-4 w-4 text-blue-600" />
+                            </div>
+                            <span className="text-gray-700">Last known normal blood pressure</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                              <ArrowTrendingUpIcon className="h-4 w-4 text-blue-600" />
+                            </div>
+                            <span className="text-gray-700">Course of the blood pressure</span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50 hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-purple-100 p-2 mr-3">
+                            <PillIcon className="h-5 w-5 text-purple-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Prior treatment of hypertension</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                              <BeakerIcon className="h-4 w-4 text-purple-600" />
+                            </div>
+                            <span className="text-gray-700">Drugs: types, doses, side effects</span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-red-100 p-2 mr-3">
+                            <ExclamationCircleIcon className="h-5 w-5 text-red-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Intake of agents that may cause hypertension</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          <div className="bg-gradient-to-r from-red-50 to-red-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-red-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-red-600" />
+                              </div>
+                              <span className="text-gray-700">Nonsteroidal antiinflammatory drugs</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-pink-50 to-pink-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-pink-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-pink-600" />
+                              </div>
+                              <span className="text-gray-700">Estrogens</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-orange-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-orange-600" />
+                              </div>
+                              <span className="text-gray-700">Adrenal steroids</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-gray-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-gray-600" />
+                              </div>
+                              <span className="text-gray-700">Cocaine</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-amber-50 to-amber-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-amber-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-amber-600" />
+                              </div>
+                              <span className="text-gray-700">Sympathomimetics</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                                <BoltIcon className="h-4 w-4 text-blue-600" />
+                              </div>
+                              <span className="text-gray-700">Excessive sodium</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50 hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-green-100 p-2 mr-3">
+                            <UserGroupIcon className="h-5 w-5 text-green-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Family history</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-green-100 p-1 mr-2 mt-0.5">
+                              <HeartIcon className="h-4 w-4 text-green-600" />
+                            </div>
+                            <span className="text-gray-700">Hypertension</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-green-100 p-1 mr-2 mt-0.5">
+                              <ExclamationCircleIcon className="h-4 w-4 text-green-600" />
+                            </div>
+                            <span className="text-gray-700">Premature cardiovascular disease or death</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-green-100 p-1 mr-2 mt-0.5">
+                              <ChartBarIcon className="h-4 w-4 text-green-600" />
+                            </div>
+                            <span className="text-gray-700">Familial diseases: pheochromocytoma, renal disease, diabetes, gout</span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Symptoms of secondary causes</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Muscle weakness</li>
+                          <li>Spells of tachycardia, sweating, tremor</li>
+                          <li>Thinning of the skin</li>
+                          <li>Flank pain</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Symptoms of target-organ damage</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Headaches</li>
+                          <li>Transient weakness or blindness</li>
+                          <li>Loss of visual acuity</li>
+                          <li>Chest pain</li>
+                          <li>Dyspnea</li>
+                          <li>Claudication</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Presence of other risk factors</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Smoking</li>
+                          <li>Diabetes</li>
+                          <li>Dyslipidemia</li>
+                          <li>Physical inactivity</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Dietary history</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Sodium</li>
+                          <li>Processed foods</li>
+                          <li>Alcohol</li>
+                          <li>Saturated fats</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Psychosocial factors</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Family structure</li>
+                          <li>Work status</li>
+                          <li>Educational level</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Sexual function</td>
+                      <td className="px-6 py-4">
+                        <p>Assessment of sexual function</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Features of sleep apnea</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Early morning headaches</li>
+                          <li>Daytime somnolence</li>
+                          <li>Loud snoring</li>
+                          <li>Erratic sleep</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             
-            <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-yellow-800">Practice Question</h3>
+            <div className="bg-gradient-to-br from-yellow-50 to-amber-100 p-5 rounded-lg shadow-md border border-yellow-200 mt-6">
+              <h3 className="text-xl font-bold mb-4 text-yellow-800 border-b pb-2 border-yellow-200 flex items-center">
+                <div className="rounded-full bg-yellow-100 p-2 mr-3">
+                  <AcademicCapIcon className="h-5 w-5 text-yellow-600" />
+                </div>
+                Practice Question
+              </h3>
               <p className="mb-4">Which of these historical features would suggest a possible secondary cause of hypertension?</p>
               <button 
                 onClick={() => toggleAnswer('secondary-cause')}
-                className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
               >
                 {showAnswers['secondary-cause'] ? 'Hide Answer' : 'Show Answer'}
               </button>
               {showAnswers['secondary-cause'] && (
-                <div className="mt-4 p-3 bg-white rounded">
-                  <ul className="list-disc pl-5">
-                    <li>Spells of tachycardia, sweating, and tremor (suggestive of pheochromocytoma)</li>
-                    <li>Muscle weakness (could suggest hyperaldosteronism)</li>
-                    <li>Thinning of the skin (could suggest Cushing's syndrome)</li>
-                    <li>Flank pain (could suggest renal artery stenosis or other kidney disorders)</li>
+                <div className="mt-4 p-4 bg-gradient-to-r from-white to-yellow-50 rounded-lg shadow-inner">
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                        <ExclamationCircleIcon className="h-4 w-4 text-yellow-600" />
+                      </div>
+                      <span className="text-gray-700">Spells of tachycardia, sweating, and tremor (suggestive of pheochromocytoma)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                        <ExclamationCircleIcon className="h-4 w-4 text-yellow-600" />
+                      </div>
+                      <span className="text-gray-700">Muscle weakness (could suggest hyperaldosteronism)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                        <ExclamationCircleIcon className="h-4 w-4 text-yellow-600" />
+                      </div>
+                      <span className="text-gray-700">Thinning of the skin (could suggest Cushing's syndrome)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                        <ExclamationCircleIcon className="h-4 w-4 text-yellow-600" />
+                      </div>
+                      <span className="text-gray-700">Flank pain (could suggest renal artery stenosis or other kidney disorders)</span>
+                    </li>
                   </ul>
                 </div>
               )}
@@ -249,113 +395,245 @@ const HypertensionStudyApp = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Physical Examination in Hypertensive Patients</h2>
             
-            <div className="overflow-x-auto border rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-blue-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Elements to Assess</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Blood Pressure</td>
-                    <td className="px-6 py-4">Accurate measurement of blood pressure</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">General appearance</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Distribution of body fat</li>
-                        <li>Skin lesions</li>
-                        <li>Muscle strength</li>
-                        <li>Alertness</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Fundoscopy</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Hemorrhage</li>
-                        <li>Papilledema</li>
-                        <li>Cotton wool spots</li>
-                        <li>Arteriolar narrowing and arteriovenous nicking</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Neck</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Palpation and auscultation of carotids</li>
-                        <li>Thyroid</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Heart</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Size</li>
-                        <li>Rhythm</li>
-                        <li>Sounds</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lungs</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Rhonchi</li>
-                        <li>Rales</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Abdomen</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Renal masses</li>
-                        <li>Bruits over aorta or renal arteries</li>
-                        <li>Femoral pulses</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Extremities</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Peripheral pulses</li>
-                        <li>Edema</li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Neurologic assessment</td>
-                    <td className="px-6 py-4">
-                      <ul className="list-disc pl-5">
-                        <li>Visual disturbance</li>
-                        <li>Focal weakness</li>
-                        <li>Confusion</li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg shadow-md border border-blue-200">
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gradient-to-r from-blue-600 to-indigo-600">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Area</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Elements to Assess</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    <tr className="hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-red-100 p-2 mr-3">
+                            <HeartIcon className="h-5 w-5 text-red-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Blood Pressure</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-red-100 p-1.5 mr-2">
+                            <ChartBarIcon className="h-4 w-4 text-red-600" />
+                          </div>
+                          <span className="text-gray-700">Accurate measurement of blood pressure</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50 hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-purple-100 p-2 mr-3">
+                            <IdentificationIcon className="h-5 w-5 text-purple-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">General appearance</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                              <ArrowTrendingUpIcon className="h-4 w-4 text-purple-600" />
+                            </div>
+                            <span className="text-gray-700">Distribution of body fat</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                              <ShieldCheckIcon className="h-4 w-4 text-purple-600" />
+                            </div>
+                            <span className="text-gray-700">Skin lesions</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                              <BoltIcon className="h-4 w-4 text-purple-600" />
+                            </div>
+                            <span className="text-gray-700">Muscle strength</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                              <ClipboardDocumentCheckIcon className="h-4 w-4 text-purple-600" />
+                            </div>
+                            <span className="text-gray-700">Alertness</span>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-green-100 p-2 mr-3">
+                            <EyeIcon className="h-5 w-5 text-green-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Fundoscopy</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          <div className="bg-gradient-to-r from-red-50 to-red-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-red-100 p-1 mr-2 mt-0.5">
+                                <ExclamationCircleIcon className="h-4 w-4 text-red-600" />
+                              </div>
+                              <span className="text-gray-700">Hemorrhage</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                                <ExclamationCircleIcon className="h-4 w-4 text-yellow-600" />
+                              </div>
+                              <span className="text-gray-700">Papilledema</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-blue-100 p-1 mr-2 mt-0.5">
+                                <ExclamationCircleIcon className="h-4 w-4 text-blue-600" />
+                              </div>
+                              <span className="text-gray-700">Cotton wool spots</span>
+                            </div>
+                          </div>
+                          <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-2 rounded-lg">
+                            <div className="flex items-start">
+                              <div className="rounded-full bg-purple-100 p-1 mr-2 mt-0.5">
+                                <ExclamationCircleIcon className="h-4 w-4 text-purple-600" />
+                              </div>
+                              <span className="text-gray-700">Arteriolar narrowing and arteriovenous nicking</span>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50 hover:bg-blue-50 transition duration-150">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="rounded-full bg-purple-100 p-2 mr-3">
+                            <IdentificationIcon className="h-5 w-5 text-purple-600" />
+                          </div>
+                          <span className="font-medium text-gray-900">Neck</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Palpation and auscultation of carotids</li>
+                          <li>Thyroid</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Heart</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Size</li>
+                          <li>Rhythm</li>
+                          <li>Sounds</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Lungs</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Rhonchi</li>
+                          <li>Rales</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Abdomen</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Renal masses</li>
+                          <li>Bruits over aorta or renal arteries</li>
+                          <li>Femoral pulses</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Extremities</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Peripheral pulses</li>
+                          <li>Edema</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Neurologic assessment</td>
+                      <td className="px-6 py-4">
+                        <ul className="list-disc pl-5">
+                          <li>Visual disturbance</li>
+                          <li>Focal weakness</li>
+                          <li>Confusion</li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 mt-6">
-              <h3 className="text-xl font-bold mb-3 text-blue-800">Focus On: Fundoscopic Examination</h3>
-              <p className="mb-3">Fundoscopic examination is crucial in hypertensive patients as it allows direct visualization of the effects of hypertension on blood vessels.</p>
-              <p className="mb-3">The Keith-Wagener-Barker classification of hypertensive retinopathy:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Grade I:</strong> Mild narrowing or sclerosis of arterioles</li>
-                <li><strong>Grade II:</strong> Moderate to marked sclerosis of arterioles with arteriovenous nicking</li>
-                <li><strong>Grade III:</strong> Grade II plus flame hemorrhages, cotton-wool spots, and hard exudates</li>
-                <li><strong>Grade IV:</strong> Grade III plus papilledema</li>
-              </ul>
-              <p className="mt-3">Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</p>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-5 rounded-lg shadow-md border border-blue-200 mt-6">
+              <h3 className="text-xl font-bold mb-4 text-blue-800 border-b pb-2 border-blue-200 flex items-center">
+                <div className="rounded-full bg-blue-100 p-2 mr-3">
+                  <EyeIcon className="h-5 w-5 text-blue-600" />
+                </div>
+                Focus On: Fundoscopic Examination
+              </h3>
+              <div className="bg-white p-4 rounded-lg shadow-sm">
+                <p className="mb-3">Fundoscopic examination is crucial in hypertensive patients as it allows direct visualization of the effects of hypertension on blood vessels.</p>
+                
+                <div className="bg-blue-50 p-4 rounded-lg mb-3">
+                  <p className="font-medium text-blue-800 mb-2">The Keith-Wagener-Barker classification of hypertensive retinopathy:</p>
+                  <div className="space-y-3">
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-green-400">
+                      <div className="flex items-center">
+                        <div className="rounded-full bg-green-100 p-1.5 mr-2">
+                          <span className="text-green-800 font-bold text-sm">I</span>
+                        </div>
+                        <p><span className="font-bold">Grade I:</span> Mild narrowing or sclerosis of arterioles</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-yellow-400">
+                      <div className="flex items-center">
+                        <div className="rounded-full bg-yellow-100 p-1.5 mr-2">
+                          <span className="text-yellow-800 font-bold text-sm">II</span>
+                        </div>
+                        <p><span className="font-bold">Grade II:</span> Moderate to marked sclerosis of arterioles with arteriovenous nicking</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-orange-400">
+                      <div className="flex items-center">
+                        <div className="rounded-full bg-orange-100 p-1.5 mr-2">
+                          <span className="text-orange-800 font-bold text-sm">III</span>
+                        </div>
+                        <p><span className="font-bold">Grade III:</span> Grade II plus flame hemorrhages, cotton-wool spots, and hard exudates</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white p-3 rounded-lg shadow-sm border-l-4 border-red-400">
+                      <div className="flex items-center">
+                        <div className="rounded-full bg-red-100 p-1.5 mr-2">
+                          <span className="text-red-800 font-bold text-sm">IV</span>
+                        </div>
+                        <p><span className="font-bold">Grade IV:</span> Grade III plus papilledema</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-yellow-50 p-3 rounded-lg flex items-start">
+                  <div className="rounded-full bg-yellow-400 p-1 flex-shrink-0 mr-2 mt-0.5">
+                    <span className="text-yellow-900 text-xs font-bold">!</span>
+                  </div>
+                  <p className="text-sm">Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -578,103 +856,209 @@ const HypertensionStudyApp = () => {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Self Quiz - Hypertension Part 2</h2>
             
-            <div className="bg-white p-4 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold mb-3">Test Your Knowledge</h3>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-lg shadow-md border border-blue-200">
+              <h3 className="text-xl font-bold mb-4 text-blue-800 border-b pb-2 border-blue-200 flex items-center">
+                <div className="rounded-full bg-blue-100 p-2 mr-3">
+                  <AcademicCapIcon className="h-5 w-5 text-blue-600" />
+                </div>
+                Test Your Knowledge
+              </h3>
               
               {/* Question 1 */}
-              <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">1. What are the four grades of hypertensive retinopathy (Keith-Wagener-Barker classification), and which grades indicate higher cardiovascular risk?</h4>
+              <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-400">
+                <h4 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <div className="rounded-full bg-green-100 p-1.5 mr-2">
+                    <span className="text-green-800 font-bold">1</span>
+                  </div>
+                  What are the four grades of hypertensive retinopathy (Keith-Wagener-Barker classification), and which grades indicate higher cardiovascular risk?
+                </h4>
                 <button 
                   onClick={() => toggleAnswer('htn_quiz1')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
                 >
                   {showAnswers['htn_quiz1'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
                 {showAnswers['htn_quiz1'] && (
-                  <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p><strong>Grades:</strong></p>
-                    <ul className="list-disc pl-5 mt-1">
-                      <li>Grade I: Mild arteriolar narrowing/sclerosis</li>
-                      <li>Grade II: Moderate/marked sclerosis + AV nicking</li>
-                      <li>Grade III: Grade II + hemorrhages, cotton-wool spots, exudates</li>
-                      <li>Grade IV: Grade III + papilledema</li>
+                  <div className="mt-3 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-inner">
+                    <p className="font-medium text-green-800 mb-2">Grades:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-green-100 p-1 mr-2 mt-0.5">
+                          <span className="text-green-800 font-bold text-xs">I</span>
+                        </div>
+                        <span className="text-gray-700">Grade I: Mild arteriolar narrowing/sclerosis</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-yellow-100 p-1 mr-2 mt-0.5">
+                          <span className="text-yellow-800 font-bold text-xs">II</span>
+                        </div>
+                        <span className="text-gray-700">Grade II: Moderate/marked sclerosis + AV nicking</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-orange-100 p-1 mr-2 mt-0.5">
+                          <span className="text-orange-800 font-bold text-xs">III</span>
+                        </div>
+                        <span className="text-gray-700">Grade III: Grade II + hemorrhages, cotton-wool spots, exudates</span>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="rounded-full bg-red-100 p-1 mr-2 mt-0.5">
+                          <span className="text-red-800 font-bold text-xs">IV</span>
+                        </div>
+                        <span className="text-gray-700">Grade IV: Grade III + papilledema</span>
+                      </li>
                     </ul>
-                    <p className="mt-2"><strong>Higher Risk:</strong> Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</p>
+                    <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                      <p className="flex items-start">
+                        <div className="rounded-full bg-yellow-400 p-1 mr-2 mt-0.5">
+                          <span className="text-yellow-900 text-xs font-bold">!</span>
+                        </div>
+                        <span className="text-gray-700"><span className="font-bold">Higher Risk:</span> Grades III and IV are associated with increased cardiovascular risk and end-organ damage.</span>
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
               
               {/* Question 2 */}
-              <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">2. According to the 2017 ACC/AHA guidelines, how is Stage 1 Hypertension defined (Systolic and Diastolic values)?</h4>
+              <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-400">
+                <h4 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <div className="rounded-full bg-blue-100 p-1.5 mr-2">
+                    <span className="text-blue-800 font-bold">2</span>
+                  </div>
+                  According to the 2017 ACC/AHA guidelines, how is Stage 1 Hypertension defined (Systolic and Diastolic values)?
+                </h4>
                 <button 
                   onClick={() => toggleAnswer('htn_quiz2')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
                 >
                   {showAnswers['htn_quiz2'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
                 {showAnswers['htn_quiz2'] && (
-                  <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Stage 1 Hypertension is defined as a Systolic Blood Pressure (SBP) of 130-139 mm Hg OR a Diastolic Blood Pressure (DBP) of 80-89 mm Hg.</p>
+                  <div className="mt-3 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-inner">
+                    <div className="flex items-center">
+                      <div className="rounded-full bg-blue-500 p-1.5 mr-2">
+                        <HeartIcon className="h-4 w-4 text-white" />
+                      </div>
+                      <p className="text-gray-700">Stage 1 Hypertension is defined as a <span className="font-bold text-blue-700">Systolic Blood Pressure (SBP) of 130-139 mm Hg</span> OR a <span className="font-bold text-blue-700">Diastolic Blood Pressure (DBP) of 80-89 mm Hg</span>.</p>
+                    </div>
                   </div>
                 )}
               </div>
               
               {/* Question 3 */}
-              <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">3. Why is obtaining out-of-office blood pressure measurements (like home or ambulatory monitoring) recommended before starting hypertension treatment?</h4>
+              <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-purple-400">
+                <h4 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <div className="rounded-full bg-purple-100 p-1.5 mr-2">
+                    <span className="text-purple-800 font-bold">3</span>
+                  </div>
+                  Why is obtaining out-of-office blood pressure measurements (like home or ambulatory monitoring) recommended before starting hypertension treatment?
+                </h4>
                 <button 
                   onClick={() => toggleAnswer('htn_quiz3')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
                 >
                   {showAnswers['htn_quiz3'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
                 {showAnswers['htn_quiz3'] && (
-                  <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Out-of-office measurements help confirm the diagnosis of hypertension and rule out "white coat hypertension" (elevated BP only in the clinical setting). They provide a more accurate picture of the patient's usual blood pressure before committing to long-term medication.</p>
+                  <div className="mt-3 p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg shadow-inner">
+                    <div className="flex items-start">
+                      <div className="rounded-full bg-purple-500 p-1.5 mr-2 mt-0.5">
+                        <ClipboardDocumentCheckIcon className="h-4 w-4 text-white" />
+                      </div>
+                      <p className="text-gray-700">Out-of-office measurements help confirm the diagnosis of hypertension and rule out "white coat hypertension" (elevated BP only in the clinical setting). They provide a more accurate picture of the patient's usual blood pressure before committing to long-term medication.</p>
+                    </div>
                   </div>
                 )}
               </div>
 
               {/* Question 4 */}
-              <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">4. Name three key lifestyle modifications recommended for managing hypertension.</h4>
+              <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-400">
+                <h4 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <div className="rounded-full bg-amber-100 p-1.5 mr-2">
+                    <span className="text-amber-800 font-bold">4</span>
+                  </div>
+                  Name three key lifestyle modifications recommended for managing hypertension.
+                </h4>
                 <button 
                   onClick={() => toggleAnswer('htn_quiz4')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
                 >
                   {showAnswers['htn_quiz4'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
                 {showAnswers['htn_quiz4'] && (
-                  <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>Any three of the following:</p>
-                    <ul className="list-disc pl-5 mt-1">
-                        <li>Weight loss (if overweight/obese)</li>
-                        <li>Heart-healthy diet (e.g., DASH diet - rich in fruits, vegetables, low-fat dairy, reduced saturated/total fat)</li>
-                        <li>Dietary sodium reduction (&lt;1500 mg/day ideally)</li>
-                        <li>Regular aerobic physical activity (e.g., ≥150 min/week moderate-intensity)</li>
-                        <li>Moderation of alcohol consumption</li>
-                    </ul>
+                  <div className="mt-3 p-4 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg shadow-inner">
+                    <p className="font-medium text-amber-800 mb-2">Any three of the following:</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="bg-white p-3 rounded shadow-sm">
+                        <div className="flex items-start">
+                          <div className="rounded-full bg-amber-100 p-1.5 mr-2 mt-0.5">
+                            <ArrowTrendingDownIcon className="h-4 w-4 text-amber-600" />
+                          </div>
+                          <span className="text-gray-700">Weight loss (if overweight/obese)</span>
+                        </div>
+                      </div>
+                      <div className="bg-white p-3 rounded shadow-sm">
+                        <div className="flex items-start">
+                          <div className="rounded-full bg-green-100 p-1.5 mr-2 mt-0.5">
+                            <GlobeAltIcon className="h-4 w-4 text-green-600" />
+                          </div>
+                          <span className="text-gray-700">Heart-healthy diet (e.g., DASH diet)</span>
+                        </div>
+                      </div>
+                      <div className="bg-white p-3 rounded shadow-sm">
+                        <div className="flex items-start">
+                          <div className="rounded-full bg-blue-100 p-1.5 mr-2 mt-0.5">
+                            <ArrowTrendingDownIcon className="h-4 w-4 text-blue-600" />
+                          </div>
+                          <span className="text-gray-700">Dietary sodium reduction</span>
+                        </div>
+                      </div>
+                      <div className="bg-white p-3 rounded shadow-sm">
+                        <div className="flex items-start">
+                          <div className="rounded-full bg-purple-100 p-1.5 mr-2 mt-0.5">
+                            <BoltIcon className="h-4 w-4 text-purple-600" />
+                          </div>
+                          <span className="text-gray-700">Regular aerobic physical activity</span>
+                        </div>
+                      </div>
+                      <div className="bg-white p-3 rounded shadow-sm">
+                        <div className="flex items-start">
+                          <div className="rounded-full bg-red-100 p-1.5 mr-2 mt-0.5">
+                            <BeakerIcon className="h-4 w-4 text-red-600" />
+                          </div>
+                          <span className="text-gray-700">Moderation of alcohol consumption</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
 
               {/* Question 5 */}
-              <div className="mb-6">
-                <h4 className="font-bold text-gray-800 mb-2">5. A patient reports spells of tachycardia, sweating, and tremor during the history taking. What potential secondary cause of hypertension might this suggest?</h4>
+              <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-400">
+                <h4 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <div className="rounded-full bg-red-100 p-1.5 mr-2">
+                    <span className="text-red-800 font-bold">5</span>
+                  </div>
+                  A patient reports spells of tachycardia, sweating, and tremor during the history taking. What potential secondary cause of hypertension might this suggest?
+                </h4>
                 <button 
                   onClick={() => toggleAnswer('htn_quiz5')}
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                  className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded hover:shadow-md transition duration-300 shadow-sm"
                 >
                   {showAnswers['htn_quiz5'] ? 'Hide Answer' : 'Show Answer'}
                 </button>
                 {showAnswers['htn_quiz5'] && (
-                  <div className="mt-2 p-3 bg-gray-50 rounded">
-                    <p>These symptoms (paroxysms of tachycardia, sweating, tremor) are classic signs suggestive of Pheochromocytoma, a catecholamine-secreting tumor.</p>
+                  <div className="mt-3 p-4 bg-gradient-to-r from-red-50 to-red-100 rounded-lg shadow-inner">
+                    <div className="flex items-center">
+                      <div className="rounded-full bg-red-500 p-1.5 mr-2">
+                        <ExclamationCircleIcon className="h-4 w-4 text-white" />
+                      </div>
+                      <p className="text-gray-700">These symptoms (paroxysms of tachycardia, sweating, tremor) are classic signs suggestive of <span className="font-bold text-red-700">Pheochromocytoma</span>, a catecholamine-secreting tumor.</p>
+                    </div>
                   </div>
                 )}
               </div>
-
             </div>
           </div>
         )}
