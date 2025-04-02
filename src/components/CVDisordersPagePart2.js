@@ -43,6 +43,12 @@ const CVDisordersPagePart2 = () => {
         >
           Self Quiz
         </button>
+        <button
+          onClick={() => setActiveTab('pdf')}
+          className={`px-4 py-2 font-medium text-sm ${activeTab === 'pdf' ? 'bg-orange-100 border-b-2 border-orange-600' : 'text-gray-600 hover:text-orange-800'}`}
+        >
+          View PDF Pages (21-30)
+        </button>
       </div>
 
       <div className="p-6 w-full">
@@ -282,6 +288,26 @@ const CVDisordersPagePart2 = () => {
                 )}
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'pdf' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-orange-800 mb-4">Study Guide PDF - Pages 21-30</h2>
+            <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <p className="mb-4">Click the link below to view the original PDF pages for this section (opens in a new tab).</p>
+              <a
+                href="/pdfs/680_CV_disorders_part_one_students_2023 (1)_21-30.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition font-medium"
+              >
+                Open PDF (Pages 21-30)
+              </a>
+              <p className="mt-4 text-sm text-gray-600">
+                Ensure the PDF file `680_CV_disorders_part_one_students_2023 (1)_21-30.pdf` is placed in the `public/pdfs` directory of your project.
+              </p>
             </div>
           </div>
         )}
